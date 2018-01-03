@@ -414,3 +414,19 @@ function set_quotas()
 
     return $status;
 }
+function has_arrived($id)
+{
+    global $bd;
+    $arrival = $bd->prepare('INSERT INTO entrees VALUES (:id, 1, :arrival_time)');
+    date_default_timezone_set('Europe/Belgrade');
+    $arrival_time = date('Y-m-d H:i:s', time());
+    $arrival -> execute(array('id' => $id, 'arrival_time' => $arrival_time));
+}
+function set_id_inviteur($id)
+{
+    global $bd;
+    $inviteur = $bd->prepare('SELECT icam_id FROM icam_has_guest WHERE guest_id =:id');
+    $inviteur -> execute(array('id' => $id));
+    $invite_id = $inviteur->fetch()['icam_id'];
+    return $invite_id;
+}

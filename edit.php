@@ -21,5 +21,5 @@ if ($nb_invites >0)
 require 'include/html/header.php';
 require 'include/html/edit/tableau_edit.php';
 require 'include/html/edit/form_edit.php';
-require 'include/html/edit/tableau_invites.php';
+require 'include/html/edit/tableau_complementaire.php';
 include 'include/html/footer.php';
