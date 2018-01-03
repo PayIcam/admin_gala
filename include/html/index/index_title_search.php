@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-md-5">
-        <p><h3>Liste des participants au Gala</h3><p>Actuellement <?php echo $nb_participants['COUNT(*)'] ?> invités</p>
+        <p><h3>Liste des participants au Gala</h3><p>Actuellement <?php echo htmlspecialchars($nb_participants['COUNT(*)']) ?> invités</p>
     </div>
 </div>
 <form action="index.php" method="post">
     <div class="row">
         <div class= "col-md-3">
             <input type="input-medium search-query" class="form-control" name ="recherche" id="recherche" placeholder="Nom, prenom..."
-            value="<?php if(isset($_POST['recherche'])){echo $_POST['recherche'];} ?>">
+            value="<?php if(isset($_POST['recherche'])){echo htmlspecialchars($_POST['recherche']);} ?>">
             <script>
                 var liste = [
                 "Draggable",

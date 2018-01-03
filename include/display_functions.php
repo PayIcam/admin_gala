@@ -6,20 +6,20 @@ function diner_conference($guest)
     {
         if ($guest['repas'] ==1 and $guest['buffet'] ==1)
         {
-        echo 'Dîner et conférence';
+        echo htmlspecialchars('Dîner et conférence');
         }
         elseif ($guest['repas'] ==1 and !$guest['buffet'] ==1)
         {
-        echo 'Dîner';
+        echo htmlspecialchars('Dîner');
         }
         else
         {
-        echo 'Conférence';
+        echo htmlspecialchars('Conférence');
         }
     }
     else
     {
-        echo 'Pas d\'options';
+        echo htmlspecialchars('Pas d\'options');
     }
 }
 function ajustement_creneau($creneau)
@@ -36,7 +36,7 @@ function ajustement_creneau($creneau)
             $creneau = '22h40-23h10';
             break;
     }
-    echo $creneau;
+    echo htmlspecialchars($creneau);
     return $creneau;
 }
 

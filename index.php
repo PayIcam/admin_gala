@@ -1,11 +1,12 @@
 <?php
 
 session_start();
+require 'config.dist.php';
 require 'include/db_functions.php';
 require 'include/display_functions.php';
 require 'include/html/display_html_functions.php';
 
-$bd = set_db();
+$bd = connect_to_db($confSQL);
 
 if (isset($_POST['page']))
 {
@@ -28,7 +29,6 @@ if (isset($_POST['recherche']))
     {
         $invite = all_guests($rang);
     }
-    // echo $invite['count(*)'] . 'entrées correspondent à la recherche.';
 }
 else
 {

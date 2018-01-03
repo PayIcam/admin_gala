@@ -17,9 +17,9 @@
                 // var_dump($row);
             ?>
                 <tr>
-                    <td class="case_tableau_1"><label for="row"><?php echo $row['name'] ?></label></td>
-                    <td class="case_tableau_1"><?php echo $row['current'];  ?> </td>
-                    <td class="case_tableau_1"><?php echo $row['value'];  ?> </td>
+                    <td class="case_tableau_1"><label for="row"><?php echo htmlspecialchars($row['name']) ?></label></td>
+                    <td class="case_tableau_1"><?php echo htmlspecialchars($row['current']);  ?> </td>
+                    <td class="case_tableau_1"><?php echo htmlspecialchars($row['value']);  ?> </td>
                 </tr>
             <?php } ?>
             </tbody>

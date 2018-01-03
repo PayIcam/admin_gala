@@ -1,25 +1,19 @@
 <?php
 
-function set_db()
+function connect_to_db($conf)
 {
-    function connect_to_db($conf)
+    try
     {
-        try
-        {
-            $bd = new PDO('mysql:host='.$conf['sql_host'].';dbname='.$conf['sql_db'].';charset=utf8',$conf['sql_user'],$conf['sql_pass'],array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION ));
-            $bd ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $bd;
-        }
-        catch(Exeption $e)
-        {
-            die('erreur:'.$e->getMessage());
-        }
+        $bd = new PDO('mysql:host='.$conf['sql_host'].';dbname='.$conf['sql_db'].';charset=utf8',$conf['sql_user'],$conf['sql_pass'],array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION ));
+        $bd ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $bd;
     }
-    $_CONFIG['conf_gala'] = ['sql_host' => "localhost", 'sql_db' => "galadesicam", 'sql_user' => "root", 'sql_pass' => "" ];
-    $confSQL = $_CONFIG['conf_gala'];
-    $bd = connect_to_db($confSQL);
-    return $bd;
+    catch(Exeption $e)
+    {
+        die('erreur:'.$e->getMessage());
+    }
 }
+
 function nb_participants()
 {
     global $bd;

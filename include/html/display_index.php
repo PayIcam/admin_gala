@@ -1,7 +1,7 @@
 <div class = 'container'>
     <?php
     require 'include/html/index/index_title_search.php';
-    if (isset($_SESSION['search_match'])) {echo $_SESSION['search_match']; unset($_SESSION['search_match']);}
+    if (isset($_SESSION['search_match'])) {echo htmlspecialchars($_SESSION['search_match']); unset($_SESSION['search_match']);}
     next_page();
     ?>
     <section class="row" id="tableau">

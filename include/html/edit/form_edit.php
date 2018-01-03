@@ -1,7 +1,7 @@
 <div class="container">
     <form action ="edit_db.php" method="post">
-        <input type="hidden" value="<?php echo $edit_id; ?>" name="edit_id" />
-        <input type="hidden" value="<?php echo $edit_data['is_icam']; ?>" name="is_icam" />
+        <input type="hidden" value="<?php echo htmlspecialchars($edit_id); ?>" name="edit_id" />
+        <input type="hidden" value="<?php echo htmlspecialchars($edit_data['is_icam']); ?>" name="is_icam" />
 
         <?php if($edit_data['is_icam'] ==0)
         { ?>
@@ -9,7 +9,7 @@
                 <span class="input-group-addon" id="sizing-addon2">Nom</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nom"
                 <?php
-                if (isset($edit_data['nom'])) { echo 'value="'. $edit_data['nom'].'"'; } ?>
+                if (isset($edit_data['nom'])) { echo htmlspecialchars('value='. $edit_data['nom'].''); } ?>
                 >
             </div>
             <br>
@@ -17,7 +17,7 @@
                 <span class="input-group-addon" id="sizing-addon2">Prénom</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="prenom"
                 <?php
-                if (isset($edit_data['prenom'])) { echo 'value="'. $edit_data['prenom'].'"'; } ?>
+                if (isset($edit_data['prenom'])) { echo htmlspecialchars('value='. $edit_data['prenom'].''); } ?>
                 >
             </div>
         <?php } ?>
@@ -27,7 +27,7 @@
             <span class="input-group-addon" id="sizing-addon2"><i class="fas fa-phone"></i></span>
             <input type="text" class="form-control" placeholder="Telephone" aria-describedby="sizing-addon2" name="telephone"
             <?php
-            if (isset($edit_data['telephone'])) { echo 'value="'. $edit_data['telephone'].'"'; } ?>
+            if (isset($edit_data['telephone'])) { echo htmlspecialchars('value='. $edit_data['telephone'].''); } ?>
             >
         </div>
         <?php } ?>
@@ -36,16 +36,16 @@
             <span class="input-group-addon" id="sizing-addon2">N° de bracelet</span>
             <input type="text" class="form-control" aria-describedby="sizing-addon2" name="bracelet_id"
             <?php
-            if (isset($edit_data['bracelet_id'])) { echo 'value="'. $edit_data['bracelet_id'] .'"'; } ?>
+            if (isset($edit_data['bracelet_id'])) { echo htmlspecialchars('value='. $edit_data['bracelet_id'] .''); } ?>
             >
         </div>
         <br>
         <div class='col-md-3'>
             <label for="creneau">Créneaux d'entrée :</label><br />
             <select class="form-control" name="creneau" id="creneau">
-                <option value="21h-21h45" <?php if($edit_data['plage_horaire_entrees']=='21h-21h45') { echo ' selected'; }?> > 21h-21h35 </option>
-                <option value="21h45-22h30" <?php if($edit_data['plage_horaire_entrees']=='21h45-22h30') { echo ' selected'; }?> > 21h50-22h25 </option>
-                <option value="22h30-23h" <?php if($edit_data['plage_horaire_entrees']=='22h30-23h') { echo ' selected'; }?> > 22h40-23h10 </option>
+                <option value="21h-21h45" <?php if($edit_data['plage_horaire_entrees']=='21h-21h45') { echo htmlspecialchars(' selected'); }?> > 21h-21h35 </option>
+                <option value="21h45-22h30" <?php if($edit_data['plage_horaire_entrees']=='21h45-22h30') { echo htmlspecialchars(' selected'); }?> > 21h50-22h25 </option>
+                <option value="22h30-23h" <?php if($edit_data['plage_horaire_entrees']=='22h30-23h') { echo htmlspecialchars(' selected'); }?> > 22h40-23h10 </option>
             </select>
         </div>
         <br>
