@@ -17,7 +17,7 @@
   <meta name="description" content="Shotgun">
   <meta name="author" content="Guillaume Dubois 119">
   <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
+  <link href="css/font.css" rel="stylesheet">
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

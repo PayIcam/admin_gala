@@ -1,0 +1,4 @@
+AuthName "Seuls Florent Baron et Gregoire Giraud ont acces a cette section"
+AuthType Basic
+AuthUserFile "D:\Logiciels\wamp64\www\admin_gala_2018\secured\.htpasswd"
+Require valid-user

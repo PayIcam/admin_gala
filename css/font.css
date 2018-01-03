@@ -1,0 +1,57 @@
+.next_page
+{
+    font-size: 1.7em;
+    text-align: right;
+}
+.next_page_text
+{
+    background-color: #aaa;
+}
+.tableau_quota
+{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display:flex;
+    justify-content: center;
+    text-align:center;
+    flex-direction: column;
+    margin: 0px 100px;
+}
+.container_comparaisons
+{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+}
+.container_tableau2
+{
+    margin: 0px 5px;
+    font-size:0.7em;
+}
+.ligne_tableau2
+{
+}
+.case_tableau2
+{
+    height: 80px;
+    width:250px;
+    text-align: center;
+}
+.tableau2
+{
+}
+.all_parametres
+{
+    font-size: 1.5em;
+    margin-top: 50px;
+}
+.case_tableau1
+{
+    text-align:center;
+}
+.titre_invite
+{
+    text-align: center;
+    font-size:2.5em;
+}

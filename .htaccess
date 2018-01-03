@@ -1,0 +1,4 @@
+AuthName "Admin Gala Icam 2018"
+AuthType Basic
+AuthUserFile "D:\Logiciels\wamp64\www\admin_gala_2018\.htpasswd"
+Require valid-user
