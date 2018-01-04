@@ -1,5 +1,5 @@
 <?php
-require 'config.dist.php';
+require 'config.php';
 require 'include/html/header.php';
 require 'include/db_functions.php';
 
