@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li><a class="nav-link" href="parametres.php">Paramètres</a></li>
-            <li><a class="nav-link" href="#">Déconnexion</a></li>
+            <!-- <li><a class="nav-link" href="#">Déconnexion</a></li> -->
           </ul>
         </div>
       </div>
