@@ -58,3 +58,30 @@ function nombre_de_pages($entrees, $step)
     $nb_de_pages = intval($entrees/$step)+1;
     return $nb_de_pages;
 }
+function four_chars_bracelet_id($bracelet_id)
+{
+    $id = strval($bracelet_id);
+    $len = strlen($id);
+    switch($len)
+    {
+        case 1:
+        {
+            $zeros ='000';
+            $id = $zeros.$id;
+            break;
+        }
+        case 2:
+        {
+            $zeros ='00';
+            $id = $zeros.$id;
+            break;
+        }
+        case 3:
+        {
+            $zeros ='0';
+            $id = $zeros.$id;
+            break;
+        }
+    }
+    return $id;
+}

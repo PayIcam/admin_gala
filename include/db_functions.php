@@ -429,7 +429,7 @@ function set_quotas()
                 {
                     global $nb_total;
                     $nb_total = $quota['value'];
-                    $current = nb_participants()['COUNT(*)'];
+                    $current = nb_participants();
                     $quota['current'] = $current;
                     $quota['name'] = 'Total';
                     $status[]=$quota;
@@ -442,7 +442,7 @@ function set_quotas()
     global $bd;
     global $nb_total;
 
-    $nb_inscris = nb_participants()['COUNT(*)'];
+    $nb_inscris = nb_participants();
     $nb_icam = count_icam(true);
     $nb_invite = count_icam(false);
     $nb_bracelets = count_bracelet(true);

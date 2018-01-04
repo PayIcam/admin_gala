@@ -3,7 +3,7 @@
     <td><?php echo htmlspecialchars($guest['nom']) ?></td>
     <td><?php echo htmlspecialchars($guest['prenom']) ?></td>
     <td><?php if ($guest['promo']!=''){echo htmlspecialchars($guest['promo']);}else{echo htmlspecialchars('Invité');} ?></td>
-    <td><?php echo htmlspecialchars($guest['bracelet_id']) ?></td>
+    <td><?php echo htmlspecialchars(four_chars_bracelet_id($guest['bracelet_id'])) ?></td>
     <td><?php ajustement_creneau($guest['plage_horaire_entrees']) ?></td>
     <td><span class="badge badge-pill badge-info"><?php echo htmlspecialchars($guest['tickets_boisson']) ?></span></td>
     <td><?php echo htmlspecialchars($guest['email']) ?></td>

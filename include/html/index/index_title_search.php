@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-5">
-        <p><h3>Liste des participants au Gala</h3><p>Actuellement <?php echo htmlspecialchars($nb_participants['COUNT(*)']) ?> invités</p>
+        <p><h3>Liste des participants au Gala</h3><p>Actuellement <?php echo htmlspecialchars($nb_participants) ?> invités</p>
     </div>
 </div>
 <form action="index.php" method="post">
