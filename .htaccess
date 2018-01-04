@@ -1,4 +1,0 @@
-AuthName "Admin Gala Icam 2018"
-AuthType Basic
-AuthUserFile "/var/www/payicam/prod/admin_gala/.htpasswd"
-Require valid-user
