@@ -19,7 +19,7 @@ function nb_participants()
     global $bd;
     $participants = $bd->prepare('SELECT COUNT(*) FROM guests');
     $participants->execute();
-    $nb_participants = $participants->fetch();
+    $nb_participants = $participants->fetch()['COUNT(*)'];
     return $nb_participants;
 }
 function all_guests($rang)
@@ -167,6 +167,29 @@ function count_telephone($condition)
     $nb = $nb->fetch()['nb'];
     return $nb;
 }
+function count_price($condition)
+{
+    global $bd;
+    if ($condition==True)
+    {
+        $nb = $bd -> prepare('SELECT COUNT(price) nb FROM guests WHERE price !=0');
+    }
+    else
+    {
+        $nb = $bd -> prepare('SELECT COUNT(price) nb FROM guests WHERE price =0');
+    }
+    $nb -> execute();
+    $nb = $nb->fetch()['nb'];
+    return $nb;
+}
+function count_payement($payement)
+{
+    global $bd;
+    $nb = $bd -> prepare('SELECT COUNT(paiement) nb FROM guests WHERE paiement=:paiement');
+    $nb-> execute(array('paiement' => $payement));
+    $nb = $nb->fetch()['nb'];
+    return $nb;
+}
 function determination_recherche($recherche, $rang)
 {
     global $bd;
@@ -248,7 +271,7 @@ function determination_recherche($recherche, $rang)
             $count_recherche = count_icam($condition);
             break;
         }
-        case (preg_match("#^telephone$#i", $recherche) ? true : false):
+        case (preg_match("#^telephone|téléphone$#i", $recherche) ? true : false):
         {
             $champ = 'telephone';
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE is_icam =1 and telephone IS NOT NULL LIMIT :rang,25');
@@ -256,7 +279,7 @@ function determination_recherche($recherche, $rang)
             $count_recherche = count_telephone(True);
             break;
         }
-        case (preg_match("#^no[t]? telephone$#i", $recherche) ? true : false):
+        case (preg_match("#^no[t]? telephone| no[t]? téléphone$#i", $recherche) ? true : false):
         {
             $champ = 'telephone';
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE is_icam =1 and telephone IS NULL LIMIT :rang,25');
@@ -280,6 +303,22 @@ function determination_recherche($recherche, $rang)
             $count_recherche = count_bracelet(False);
             break;
         }
+        case (preg_match("#^price$#i", $recherche) ? true : false):
+        {
+            $champ = 'price';
+            $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE price !=0 LIMIT :rang,25');
+            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+            $count_recherche = count_price(True);
+            break;
+        }
+        case (preg_match("#^no[t]? price$#i", $recherche) ? true : false):
+        {
+            $champ = 'price';
+            $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE price=0 LIMIT :rang,25');
+            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+            $count_recherche = count_price(False);
+            break;
+        }
         case (preg_match("#^conférence|conference$#i", $recherche) ?true:false):
         {
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE buffet =1 LIMIT :rang,25');
@@ -292,6 +331,14 @@ function determination_recherche($recherche, $rang)
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE repas =1 LIMIT :rang,25');
             $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
             $count_recherche = count_diner();
+            break;
+        }
+        case (preg_match("#^PayIcam|gratuit|Pumpkin|cb|cash$#", $recherche) ? true:false):
+        {
+            $recherche_bdd = $bd -> prepare('SELECT * FROM guests WHERE paiement=:paiement LIMIT :rang,25');
+            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+            $recherche_bdd -> bindParam('paiement', $recherche, PDO::PARAM_STR);
+            $count_recherche = count_payement($recherche);
             break;
         }
         default:
@@ -308,6 +355,7 @@ function determination_recherche($recherche, $rang)
     $recherche_bdd -> execute();
     $recherche_bdd = $recherche_bdd-> fetchall();
 
+    $_SESSION['count_recherche'] = $count_recherche;
     $_SESSION['search_match'] = $count_recherche .' entrées correspondent à la recherche';
     return $recherche_bdd;
 }

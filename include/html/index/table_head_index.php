@@ -13,6 +13,7 @@
         <th scope= "col">Nombre d'invités</th>
         <th scope= "col">Infos</th> <!-- invité, conférence, diner -->
         <th scope= "col">Editer</th>
+        <th scope= "col">Ajouter un invité </th>
         <!-- <th scope= "col">Supprimer</th> -->
     </tr>
 </thead>

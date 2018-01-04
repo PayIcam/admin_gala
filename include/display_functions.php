@@ -53,3 +53,8 @@ function set_start_lign($page)
     }
     return $start_lign;
 }
+function nombre_de_pages($entrees, $step)
+{
+    $nb_de_pages = intval($entrees/$step)+1;
+    return $nb_de_pages;
+}

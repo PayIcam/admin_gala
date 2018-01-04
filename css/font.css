@@ -55,3 +55,9 @@
     text-align: center;
     font-size:2.5em;
 }
+.all_index
+{
+    position: absolute;
+    top : 60px;
+    left: 125px;
+}

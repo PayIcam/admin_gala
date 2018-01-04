@@ -10,6 +10,7 @@ if(isset($_POST['edit_id']))
 {
     $edit_data = select_single_lign($_POST['edit_id']);
     $edit_id = $_POST['edit_id'];
+    var_dump($edit_id);
 }
 
 $nb_invites = $_POST['message_invite'][0];
