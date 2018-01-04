@@ -1,5 +1,5 @@
 <?php
-require 'config.dist.php';
+require 'config.php';
 require 'include/db_functions.php';
 
 $bd = connect_to_db($confSQL);
