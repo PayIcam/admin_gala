@@ -12,6 +12,7 @@ $nb_participants = (int)nb_participants();
 
 if (isset($_POST['recherche']))
 {
+    determination_recherche($_POST['recherche'], 0);
     if ($_POST['recherche'] !="")
     {
         $nb_pages_max =nombre_de_pages($_SESSION['count_recherche'], 25);
@@ -51,6 +52,7 @@ if (isset($_POST['recherche']))
     if ($_POST['recherche'] !="")
     {
         $invite = determination_recherche($_POST['recherche'], $rang);
+        unset($_SESSION['count_recherche']);
     }
     else
     {

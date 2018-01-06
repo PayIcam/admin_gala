@@ -27,16 +27,16 @@ function ajustement_creneau($creneau)
     switch ($creneau)
     {
         case '21h-21h45':
-            $creneau = '21h-21h35';
+            $creneau = '<span style="color: blue">21h-21h35 </span> ';
             break;
         case '21h45-22h30':
-            $creneau = '21h50-22h25';
+            $creneau = '<span style="color: red">21h50-22h25 </span> ';
             break;
         case '22h30-23h':
-            $creneau = '22h40-23h10';
+            $creneau = '<span style="color: green">22h40-23h10 </span> ';
             break;
     }
-    echo htmlspecialchars($creneau);
+    echo ($creneau);
     return $creneau;
 }
 

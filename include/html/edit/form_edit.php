@@ -23,13 +23,13 @@
         <?php } ?>
         <?php if($edit_data['is_icam'] ==1)
         { ?>
-        <div class="input-group col-md-6" id='telephone'>
+        <!-- <div class="input-group col-md-6" id='telephone'>
             <span class="input-group-addon" id="sizing-addon2"><i class="fas fa-phone"></i></span>
             <input type="text" class="form-control" placeholder="Telephone" aria-describedby="sizing-addon2" name="telephone"
             <?php
             if (isset($edit_data['telephone'])) { echo htmlspecialchars('value='. $edit_data['telephone'].''); } ?>
             >
-        </div>
+        </div> -->
         <?php } ?>
         <br>
         <div class="input-group col-md-6" id='bracelet'>

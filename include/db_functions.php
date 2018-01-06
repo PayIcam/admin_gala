@@ -341,8 +341,46 @@ function determination_recherche($recherche, $rang)
             $count_recherche = count_payement($recherche);
             break;
         }
+        case (preg_match("#^[a-zéèçôîûâ] [a-zéèçôîûâ]$#", $recherche) ? true:false):
+        {
+            $recherche_bdd = $bd -> prepare('SELECT * FROM guests WHERE paiement=:paiement LIMIT :rang,25');
+            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+            $recherche_bdd -> bindParam('paiement', $recherche, PDO::PARAM_STR);
+            $count_recherche = count_payement($recherche);
+            break;
+        }
+        case (preg_match("#^[a-zéèçôîûâ]{1}+[a-zçôîûâ]{1}$#i", $recherche) ? true:false):
+        {
+            // echo 'initiales';
+            $recherche_bdd = $bd-> prepare('SELECT * FROM guests WHERE nom REGEXP :nom AND prenom REGEXP :prenom LIMIT :rang,25');
+            $prenom = '^'.$recherche[0];
+            $nom = '^'.$recherche[1];
+            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+            $recherche_bdd -> bindParam('prenom', $prenom, PDO::PARAM_STR);
+            $recherche_bdd -> bindParam('nom', $nome, PDO::PARAM_STR);
+            $count_recherche =$bd->prepare('SELECT count(*) FROM guests WHERE nom REGEXP :nom AND prenom REGEXP :prenom');
+            $count_recherche -> execute(array('prenom' => $prenom, 'nom' => $nom));
+            $count_recherche = $count_recherche->fetch()['count(*)'];
+            break;
+        }
+        case (preg_match("#^[a-zéèçôîûâ]+ [a-zçôîûâ]+$#i", $recherche) ? true:false):
+        {
+            // echo 'prenom nom'.'<br/>';
+            $recherche_bdd = $bd-> prepare('SELECT * FROM guests WHERE nom REGEXP :nom AND prenom REGEXP :prenom LIMIT :rang,25');
+            $recherche = explode(" " , $recherche);
+            $prenom = '^'.$recherche[0];
+            $nom = '^'.$recherche[1];
+            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+            $recherche_bdd -> bindParam('prenom', $prenom, PDO::PARAM_STR);
+            $recherche_bdd -> bindParam('nom', $nome, PDO::PARAM_STR);
+            $count_recherche = $bd->prepare('SELECT count(*) FROM guests WHERE nom REGEXP :nom AND prenom REGEXP :prenom ');
+            $count_recherche -> execute(array('prenom' => $prenom, 'nom' => $nom));
+            $count_recherche = $count_recherche->fetch()['count(*)'];
+            break;
+        }
         default:
         {
+            // echo 'default';
             $recherche_bdd =$bd-> prepare('SELECT * FROM guests WHERE nom REGEXP :recherche OR prenom REGEXP :recherche LIMIT :rang,25');
             $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
             $recherche_bdd -> bindParam('recherche', $recherche, PDO::PARAM_STR);
@@ -353,8 +391,13 @@ function determination_recherche($recherche, $rang)
         }
     }
     $recherche_bdd -> execute();
-    $recherche_bdd = $recherche_bdd-> fetchall();
-
+    if (!$recherche_bdd)
+    {
+        print_r($bd->errorInfo());
+    }
+    // var_dump($recherche_bdd);
+    $recherche_bdd = $recherche_bdd->fetchall();
+    // var_dump($recherche_bdd);
     $_SESSION['count_recherche'] = $count_recherche;
     $_SESSION['search_match'] = $count_recherche .' entrées correspondent à la recherche';
     return $recherche_bdd;

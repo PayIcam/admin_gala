@@ -7,6 +7,21 @@
 {
     background-color: #aaa;
 }
+.prev_page
+{
+    font-size: 1.7em;
+    text-align: right;
+}
+.prev_page_text
+{
+    background-color: #aaa;
+}
+.change_page
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
 .tableau_quota
 {
     margin-top: 50px;

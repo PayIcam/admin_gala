@@ -6,9 +6,54 @@ function next_page()
 <div class="next_page">
     <span class="next_page_text">
         <form method="post" action="index.php">
-            <input type="hidden" name="page" value="<?php if (isset($_POST['page'])) { echo htmlspecialchars($_POST['page']+1);} else{echo htmlspecialchars(2);}?>">
+            <input type="hidden" name="page" value="<?php if (isset($_POST['page'])) { echo htmlspecialchars($_POST['page']+1);} else{echo htmlspecialchars(2);}?>" />
             <?php if (isset($_POST['recherche'])) {echo ('<input type="hidden" name="recherche" value="'). $_POST['recherche']. '" /> ';} ?>
             <input type="submit" value=">" />
+        </form>
+    </span>
+</div>
+<?php
+}
+
+function prev_page()
+{
+?>
+<div class="prev_page">
+    <span class="prev_page_text">
+        <form method="post" action="index.php">
+            <input type="hidden" name="page" value="<?php if (isset($_POST['page']) and $_POST['page']>1) { echo htmlspecialchars($_POST['page']-1);}?>" />
+            <?php if (isset($_POST['recherche'])) {echo ('<input type="hidden" name="recherche" value="'). $_POST['recherche']. '" /> ';} ?>
+            <input type="submit" value="<" />
+        </form>
+    </span>
+</div>
+<?php
+}
+
+function last_page($nb_pages_max)
+{
+?>
+<div class="prev_page">
+    <span class="prev_page_text">
+        <form method="post" action="index.php">
+            <input type="hidden" name="page" value="<?php if (isset($_POST['page']) and $_POST['page']>1) { echo htmlspecialchars($nb_pages_max);}?>" />
+            <?php if (isset($_POST['recherche'])) {echo ('<input type="hidden" name="recherche" value="'). $_POST['recherche']. '" /> ';} ?>
+            <input type="submit" value=">>>" />
+        </form>
+    </span>
+</div>
+<?php
+}
+
+function first_page()
+{
+?>
+<div class="prev_page">
+    <span class="prev_page_text">
+        <form method="post" action="index.php">
+            <input type="hidden" name="page" value="<?php if (isset($_POST['page']) and $_POST['page']>1) { echo htmlspecialchars(1);}?>" />
+            <?php if (isset($_POST['recherche'])) {echo ('<input type="hidden" name="recherche" value="'). $_POST['recherche']. '" /> ';} ?>
+            <input type="submit" value="<<<" />
         </form>
     </span>
 </div>
