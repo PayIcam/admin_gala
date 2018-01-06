@@ -271,7 +271,7 @@ function determination_recherche($recherche, $rang)
             $count_recherche = count_icam($condition);
             break;
         }
-        case (preg_match("#^telephone|téléphone$#i", $recherche) ? true : false):
+        case (preg_match("#^telephone$|^téléphone$#i", $recherche) ? true : false):
         {
             $champ = 'telephone';
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE is_icam =1 and telephone IS NOT NULL LIMIT :rang,25');
@@ -279,7 +279,7 @@ function determination_recherche($recherche, $rang)
             $count_recherche = count_telephone(True);
             break;
         }
-        case (preg_match("#^no[t]? telephone| no[t]? téléphone$#i", $recherche) ? true : false):
+        case (preg_match("#^no[t]? telephone|no[t]? téléphone$#i", $recherche) ? true : false):
         {
             $champ = 'telephone';
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE is_icam =1 and telephone IS NULL LIMIT :rang,25');
