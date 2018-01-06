@@ -2,6 +2,7 @@
     <form action ="edit_db.php" method="post">
         <input type="hidden" value="<?php echo htmlspecialchars($edit_id); ?>" name="edit_id" />
         <input type="hidden" value="<?php echo htmlspecialchars($edit_data['is_icam']); ?>" name="is_icam" />
+        <input type="hidden" value="<?php echo htmlspecialchars($_POST['message_invite']); ?>" name="message_invite" />
 
         <?php if($edit_data['is_icam'] ==0)
         { ?>
@@ -50,7 +51,7 @@
         </div>
         <br>
         <div class="col-md-5">
-           <a href="gestion_db/verif_enreg_parent.php"><input type="submit" class="btn btn-primary" value="Enregistrer"></a>
+           <a href="gestion_db/verif_enreg_parent.php"><?php if(isset($_POST['fromicam'])){echo '<input type="hidden" name="fromicam" value=1 />';}?> <input type="submit" class="btn btn-primary" value="Enregistrer"></a>
         </div>
     </form>
 </div>

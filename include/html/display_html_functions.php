@@ -74,7 +74,7 @@ function display_invite($edit_data)
         <td><span class="badge badge-pill badge-info"><?php echo htmlspecialchars($edit_data['tickets_boisson']) ?></span></td>
         <td><?php echo htmlspecialchars($edit_data['inscription']); ?></td>
         <td><a data-container="body" data-toggle="popover" data-placement="top" data-content="<?php diner_conference($edit_data); ?>"><i class="fas fa-info-circle fa-lg"></i></a></td>
-        <td> <form method=post action='edit.php'> <input type="hidden" value="<?php echo htmlspecialchars($edit_data['id']); ?>" name=edit_id /> <input type="hidden" name="message_invite" value="<?php echo htmlspecialchars($message_invite); ?>" /> <input type="submit" value = Editer title="Editer l'invité <?php echo htmlspecialchars($edit_data['prenom'].' '.$edit_data['nom'])?>" /> </form> </td>
+        <td> <form method=post action='edit.php'> <input type="hidden" name ="fromicam" value=1 /> <input type="hidden" value="<?php echo htmlspecialchars($edit_data['id']); ?>" name=edit_id /> <input type="hidden" name="message_invite" value="<?php echo htmlspecialchars($message_invite); ?>" /> <input type="submit" value = Editer title="Editer l'invité <?php echo htmlspecialchars($edit_data['prenom'].' '.$edit_data['nom'])?>" /> </form> </td>
     </tr>
     <?php
 }
@@ -120,4 +120,16 @@ function display_edit_tab($edit_data)
         </section>
     </div>
     <?php
+}
+function previous_page()
+{
+    if(isset($_SERVER['HTTP_REFERER']) and !isset($noreturn))
+    {
+    ?>
+    <form method=post action="<?php echo $_SERVER['HTTP_REFERER']?>">
+        <input type ="hidden" name="retour_page_precedente" value=<?php echo 1;?> />
+        <input type="submit" value="Retour à la page précédente"/>
+    </form>
+    <?php
+    }
 }

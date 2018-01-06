@@ -2,11 +2,13 @@
 require 'config.php';
 require 'include/db_functions.php';
 
+session_start();
+
 $bd = connect_to_db($confSQL);
 
-var_dump($_POST);
 if (isset($_POST['is_icam']))
 {
+    $is_icam=1;
     $bracelet_id = $_POST['bracelet_id'];
     switch ($bracelet_id)
     {
@@ -43,11 +45,11 @@ if (isset($_POST['is_icam']))
     }
     elseif($_POST['is_icam'] == 1)
     {
-        $telephone = $_POST['telephone'];
-        if ($_POST['telephone'] =="")
-        {
-            $telephone = null;
-        }
+        // $telephone = $_POST['telephone'];
+        // if ($_POST['telephone'] =="")
+        // {
+        //     $telephone = null;
+        // }
         $update_db = $bd -> prepare('UPDATE guests SET telephone=:telephone, bracelet_id=:bracelet_id, plage_horaire_entrees=:creneau WHERE id=:id');
         $update_db->bindParam('id', $_POST['edit_id'], PDO::PARAM_INT);
         $update_db->bindParam('bracelet_id', $bracelet_id, PDO::PARAM_STR);
@@ -56,5 +58,10 @@ if (isset($_POST['is_icam']))
         $update_db = $update_db -> execute();
     }
 }
-
-header('Location: index.php');
+if (isset($_POST['fromicam']))
+{
+    echo'fromicam';
+    $_SESSION['retour_edit']=1;
+    unset($_POST['fromicam']);
+}
+header('Location: edit.php');

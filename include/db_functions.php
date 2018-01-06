@@ -395,9 +395,7 @@ function determination_recherche($recherche, $rang)
     {
         print_r($bd->errorInfo());
     }
-    // var_dump($recherche_bdd);
     $recherche_bdd = $recherche_bdd->fetchall();
-    // var_dump($recherche_bdd);
     $_SESSION['count_recherche'] = $count_recherche;
     $_SESSION['search_match'] = $count_recherche .' entrées correspondent à la recherche';
     return $recherche_bdd;

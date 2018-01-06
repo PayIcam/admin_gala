@@ -1,6 +1,17 @@
 <?php
 
 session_start();
+
+if (isset($_SERVER['HTTP_REFERER']))
+{
+    $current_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+    if ($_SERVER['HTTP_REFERER']!=$current_url and !isset($noreturn))
+    {
+        session_unset();
+    }
+}
+
+require 'include/check_load_save_previous.php';
 require 'config.php';
 require 'include/db_functions.php';
 require 'include/display_functions.php';

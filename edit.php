@@ -1,4 +1,14 @@
 <?php
+
+if (isset($_SERVER['HTTP_REFERER']))
+{
+    $current_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+    if ($_SERVER['HTTP_REFERER']==$current_url and !isset($_POST['fromicam']) and !isset($_SESSION['retour_edit']))
+    {
+        $_POST = $_SESSION['page_precedente'];
+    }
+}
+require 'include/check_load_save_previous.php';
 require 'config.php';
 require 'include/db_functions.php';
 require 'include/display_functions.php';
