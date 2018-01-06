@@ -2,8 +2,6 @@
 
 session_start();
 
-var_dump($_POST);
-
 if (isset($_SERVER['HTTP_REFERER']))
 {
     $current_url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
@@ -14,7 +12,6 @@ if (isset($_SERVER['HTTP_REFERER']))
         $_POST = $_SESSION['page_precedente'];
     }
 }
-var_dump($_POST);
 
 require 'include/check_load_save_previous.php';
 require 'config.php';
