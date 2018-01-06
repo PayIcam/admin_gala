@@ -2,14 +2,20 @@
 
 session_start();
 
+var_dump($_POST);
+
 if (isset($_SERVER['HTTP_REFERER']))
 {
     $current_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+    echo $current_url;
+    echo '<br/>'.$_SERVER['HTTP_REFERER'];
     if ($_SERVER['HTTP_REFERER']==$current_url and !isset($_POST['fromicam']) and !isset($_SESSION['retour_edit']))
     {
         $_POST = $_SESSION['page_precedente'];
     }
 }
+var_dump($_POST);
+
 require 'include/check_load_save_previous.php';
 require 'config.php';
 require 'include/db_functions.php';
