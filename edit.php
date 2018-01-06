@@ -6,7 +6,7 @@ var_dump($_POST);
 
 if (isset($_SERVER['HTTP_REFERER']))
 {
-    $current_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+    $current_url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
     echo $current_url;
     echo '<br/>'.$_SERVER['HTTP_REFERER'];
     if ($_SERVER['HTTP_REFERER']==$current_url and !isset($_POST['fromicam']) and !isset($_SESSION['retour_edit']))
