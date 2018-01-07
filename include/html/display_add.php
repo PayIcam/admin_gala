@@ -10,6 +10,10 @@ if(isset($_POST['add_id']))
 }
 else
 {
+    if(isset($_SESSION['erreur_bracelet']))
+    {
+        echo '<span style="font-size:2em; text-align: center;">'.$_SESSION['erreur_bracelet'].'</span>';
+    }
     require'../include/html/add/add_form.php';
 }
 

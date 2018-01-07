@@ -83,4 +83,15 @@
 .whole_form
 {
     margin: 50px 150px;
+    display: flex;
+    flex-direction: row;
+}
+.other_input, .text_input
+{
+    height: 100%;
+    width:50%;
+}
+.submit_btn
+{
+    margin-left: 35%;
 }
