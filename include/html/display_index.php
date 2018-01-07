@@ -27,7 +27,7 @@
     </section>
     <div class="change_page">
         <?php
-        if ($page>1) { prev_page();} if ($nb_pages_max >1 and $page <$nb_pages_max){ next_page();} if($page<$nb_pages_max) last_page($nb_pages_max);
+        if ($page>2) { first_page();} if ($page>1) { prev_page();} if ($nb_pages_max >1 and $page <$nb_pages_max){ next_page();} if($page<$nb_pages_max-1) last_page($nb_pages_max);
         ?>
     </div>
 </div>
