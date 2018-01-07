@@ -4,9 +4,7 @@ session_start();
 
 if (isset($_SERVER['HTTP_REFERER']))
 {
-    $current_url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-    echo $current_url;
-    echo '<br/>'.$_SERVER['HTTP_REFERER'];
+    $current_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
     if ($_SERVER['HTTP_REFERER']==$current_url and !isset($_POST['fromicam']) and !isset($_SESSION['retour_edit']))
     {
         $_POST = $_SESSION['page_precedente'];
