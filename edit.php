@@ -34,6 +34,7 @@ if ($nb_invites >0)
 }
 
 require 'include/html/header.php';
+require 'include/html/edit/edit_title.php';
 require 'include/html/edit/tableau_edit.php';
 require 'include/html/edit/form_edit.php';
 require 'include/html/edit/tableau_complementaire.php';

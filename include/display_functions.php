@@ -39,7 +39,6 @@ function ajustement_creneau($creneau)
     echo ($creneau);
     return $creneau;
 }
-
 function set_start_lign($page)
 {
     if (preg_match("#^[1-9][0-9]*$#", $_POST['page']))
@@ -80,6 +79,29 @@ function four_chars_bracelet_id($bracelet_id)
         {
             $zeros ='0';
             $id = $zeros.$id;
+            break;
+        }
+    }
+    switch((int)$id)
+    {
+        case (int)$id <=1050:
+        {
+            $id = '<span style="color: blue">'. $id . '</span> ';
+            break;
+        }
+        case (int)$id<=1900:
+        {
+            $id = '<span style="color: green">'. $id . '</span> ';
+            break;
+        }
+        case (int)$id<=2850:
+        {
+            $id = '<span style="color: red">'. $id . '</span> ';
+            break;
+        }
+        case (int)$id<=3200:
+        {
+            $id = '<span style="color: orange">'. $id . '</span> ';
             break;
         }
     }

@@ -36,7 +36,7 @@ function last_page($nb_pages_max)
 <div class="prev_page">
     <span class="prev_page_text">
         <form method="post" action="index.php">
-            <input type="hidden" name="page" value="<?php if (isset($_POST['page']) and $_POST['page']>1) { echo htmlspecialchars($nb_pages_max);}?>" />
+            <input type="hidden" name="page" value="<?php echo htmlspecialchars($nb_pages_max);?>" />
             <?php if (isset($_POST['recherche'])) {echo ('<input type="hidden" name="recherche" value="'). $_POST['recherche']. '" /> ';} ?>
             <input type="submit" value=">>>" />
         </form>
@@ -69,7 +69,7 @@ function display_invite($edit_data)
         <td><?php echo htmlspecialchars($edit_data['nom']) ?></td>
         <td><?php echo htmlspecialchars($edit_data['prenom']) ?></td>
         <td><?php if ($edit_data['promo']!=''){echo htmlspecialchars($edit_data['promo']);}else{echo htmlspecialchars('Invité');} ?></td>
-        <td><?php echo htmlspecialchars(four_chars_bracelet_id($edit_data['bracelet_id'])) ?></td>
+        <td><?php echo four_chars_bracelet_id($edit_data['bracelet_id']) ?></td>
         <td><?php ajustement_creneau($edit_data['plage_horaire_entrees']) ?></td>
         <td><span class="badge badge-pill badge-info"><?php echo htmlspecialchars($edit_data['tickets_boisson']) ?></span></td>
         <td><?php echo htmlspecialchars($edit_data['inscription']); ?></td>
@@ -106,7 +106,7 @@ function display_edit_tab($edit_data)
                         <td><?php echo htmlspecialchars($edit_data['nom']) ?></td>
                         <td><?php echo htmlspecialchars($edit_data['prenom']) ?></td>
                         <td><?php if ($edit_data['promo']!=''){echo htmlspecialchars($edit_data['promo']);}else{echo htmlspecialchars('Invité');} ?></td>
-                        <td><?php echo htmlspecialchars(four_chars_bracelet_id($edit_data['bracelet_id'])) ?></td>
+                        <td><?php echo four_chars_bracelet_id($edit_data['bracelet_id']) ?></td>
                         <td><?php ajustement_creneau($edit_data['plage_horaire_entrees']) ?></td>
                         <td><span class="badge badge-pill badge-info"><?php echo htmlspecialchars($edit_data['tickets_boisson']) ?></span></td>
                         <td><?php echo htmlspecialchars($edit_data['email']) ?></td>
