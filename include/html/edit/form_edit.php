@@ -51,7 +51,7 @@
         </div>
         <br>
         <div class="col-md-5">
-           <a href="gestion_db/verif_enreg_parent.php"><?php if(isset($_POST['fromicam'])){echo '<input type="hidden" name="fromicam" value=1 />';}?> <input type="submit" class="btn btn-primary" value="Enregistrer"></a>
+           <?php if(isset($_POST['fromicam'])){echo '<input type="hidden" name="fromicam" value=1 />';}?> <input type="submit" class="btn btn-primary" value="Enregistrer"/>
         </div>
     </form>
 </div>
