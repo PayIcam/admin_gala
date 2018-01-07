@@ -12,52 +12,14 @@ if (isset($_POST['is_icam']))
     $is_icam=1;
     $bracelet_id = $_POST['bracelet_id'];
     $creneau = $_POST['creneau'];
-    switch ($bracelet_id)
+    $correct=is_correct_bracelet($bracelet_id, $creneau);
+    if($bracelet_id=="")
     {
-        case "":
-        {
-            $bracelet_id=null;
-            break;
-        }
-        // case $bracelet_id<=1050:
-        // {
-        //     if ($creneau != '21h-21h45')
-        //     {
-        //         $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 1er créneau ! Recommencez svp';
-        //         goto end;
-        //     }
-        //     break;
-        // }
-        // case $bracelet_id<=1900:
-        // {
-        //     if ($creneau != '22h30-23h')
-        //     {
-        //         $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 3e créneau ! Recommencez svp';
-        //         goto end;
-        //     }
-        //     break;
-        // }
-        // case $bracelet_id<=2850:
-        // {
-        //     if ($creneau != '21h45-22h30')
-        //     {
-        //         $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 2e créneau ! Recommencez svp';
-        //         goto end;
-        //     }
-        //     break;
-        // }
-        // case $bracelet_id<=3200:
-        // {
-        //     $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet orange (spécial)! Recommencez svp';
-        //     goto end;
-        //     break;
-        // }
-        // default:
-        // {
-        //     $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') incorrecte ! Recommencez svp';
-        //     goto end;
-        //     break;
-        // }
+        $bracelet_id=null;
+    }
+    if(!$correct)
+    {
+        goto end;
     }
     if ($_POST['is_icam'] == 0)
     {

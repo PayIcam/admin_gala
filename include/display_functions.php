@@ -86,24 +86,80 @@ function four_chars_bracelet_id($bracelet_id)
     {
         case (int)$id <=1050:
         {
-            $id = '<span style="color: blue">'. $id . '</span> ';
+            $id = '<span style="color: blue">'.$id.'</span>';
             break;
         }
         case (int)$id<=1900:
         {
-            $id = '<span style="color: green">'. $id . '</span> ';
+            $id = '<span style="color: green">'.$id.'</span>';
             break;
         }
         case (int)$id<=2850:
         {
-            $id = '<span style="color: red">'. $id . '</span> ';
+            $id = '<span style="color: red">'.$id.'</span>';
             break;
         }
         case (int)$id<=3200:
         {
-            $id = '<span style="color: orange">'. $id . '</span> ';
+            $id = '<span style="color: orange">'.$id.'</span>';
             break;
         }
     }
     return $id;
+}
+function is_correct_bracelet($bracelet_id,$creneau)
+{
+    switch ($bracelet_id)
+    {
+        case "":
+        {
+            return true;
+        }
+        case $bracelet_id<=1050:
+        {
+            if ($creneau != '21h-21h45')
+            {
+                $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 1er créneau ! Recommencez svp';
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        case $bracelet_id<=1900:
+        {
+            if ($creneau != '22h30-23h')
+            {
+                $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 3e créneau ! Recommencez svp';
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        case $bracelet_id<=2850:
+        {
+            if ($creneau != '21h45-22h30')
+            {
+                $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 2e créneau ! Recommencez svp';
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        case $bracelet_id<=3200:
+        {
+            $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet orange (spécial)! Recommencez svp';
+            return false;
+        }
+        default:
+        {
+            $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') incorrecte ! Recommencez svp';
+            return false;
+        }
+    }
 }
