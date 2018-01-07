@@ -426,7 +426,7 @@ function set_quotas()
                     $horaire='21h45-22h30';
                     $current = count_creneau($horaire);
                     $quota['current'] = $current;
-                    $quota['name'] = 'Premier Créneau';
+                    $quota['name'] = 'Deuxième Créneau';
                     $status[]=$quota;
                     break;
                 }
@@ -435,7 +435,7 @@ function set_quotas()
                     $horaire='21h-21h45';
                     $current = count_creneau($horaire);
                     $quota['current'] = $current;
-                    $quota['name'] = 'Deuxième Créneau';
+                    $quota['name'] = 'Premier Créneau';
                     $status[]=$quota;
                     break;
                 }
