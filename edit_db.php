@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 require 'include/db_functions.php';
+require 'include/display_functions.php';
 
 session_start();
 
@@ -10,29 +11,54 @@ if (isset($_POST['is_icam']))
 {
     $is_icam=1;
     $bracelet_id = $_POST['bracelet_id'];
-    switch ($bracelet_id)
-    {
-        case "":
-        {
-            $bracelet_id=null;
-            break;
-        }
-        case (preg_match("#^[0-9]{1}$#", $bracelet_id) ? true:false):
-        {
-            $bracelet_id='000'.$bracelet_id;
-            break;
-        }
-        case (preg_match("#^[0-9]{2}$#", $bracelet_id) ? true:false):
-        {
-            $bracelet_id='00'.$bracelet_id;
-            break;
-        }
-        case (preg_match("#^[0-9]{3}$#", $bracelet_id) ? true:false):
-        {
-            $bracelet_id='0'.$bracelet_id;
-            break;
-        }
-    }
+    $creneau = $_POST['creneau'];
+    // switch ($bracelet_id)
+    // {
+    //     case "":
+    //     {
+    //         $bracelet_id=null;
+    //         break;
+    //     }
+    //     case $bracelet_id<=1050:
+    //     {
+    //         if ($creneau != '21h-21h45')
+    //         {
+    //             $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 1er créneau ! Recommencez svp';
+    //             goto end;
+    //         }
+    //         break;
+    //     }
+    //     case $bracelet_id<=1900:
+    //     {
+    //         if ($creneau != '22h30-23h')
+    //         {
+    //             $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 3e créneau ! Recommencez svp';
+    //             goto end;
+    //         }
+    //         break;
+    //     }
+    //     case $bracelet_id<=2850:
+    //     {
+    //         if ($creneau != '21h45-22h30')
+    //         {
+    //             $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 2e créneau ! Recommencez svp';
+    //             goto end;
+    //         }
+    //         break;
+    //     }
+    //     case $bracelet_id<=3200:
+    //     {
+    //         $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet orange (spécial)! Recommencez svp';
+    //         goto end;
+    //         break;
+    //     }
+    //     default:
+    //     {
+    //         $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') incorrecte ! Recommencez svp';
+    //         goto end;
+    //         break;
+    //     }
+    // }
     if ($_POST['is_icam'] == 0)
     {
         $update_db = $bd -> prepare('UPDATE guests SET nom=:nom, prenom=:prenom, bracelet_id=:bracelet_id, plage_horaire_entrees=:creneau WHERE id=:id');
@@ -64,4 +90,6 @@ if (isset($_POST['fromicam']))
     $_SESSION['retour_edit']=1;
     unset($_POST['fromicam']);
 }
+
+end:
 header('Location: edit.php');
