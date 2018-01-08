@@ -38,10 +38,9 @@ if (isset($_POST['is_icam']))
         // {
         //     $telephone = null;
         // }
-        $update_db = $bd -> prepare('UPDATE guests SET telephone=:telephone, bracelet_id=:bracelet_id, plage_horaire_entrees=:creneau WHERE id=:id');
+        $update_db = $bd -> prepare('UPDATE guests SET bracelet_id=:bracelet_id, plage_horaire_entrees=:creneau WHERE id=:id');
         $update_db->bindParam('id', $_POST['edit_id'], PDO::PARAM_INT);
         $update_db->bindParam('bracelet_id', $bracelet_id, PDO::PARAM_STR);
-        $update_db->bindParam('telephone', $telephone, PDO::PARAM_STR);
         $update_db->bindParam('creneau', $_POST['creneau'], PDO::PARAM_STR);
         $update_db = $update_db -> execute();
     }
