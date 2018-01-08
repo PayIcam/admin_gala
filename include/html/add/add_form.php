@@ -58,6 +58,9 @@
                     <option value="21h-21h45"> 21h-21h35 </option>
                     <option value="21h45-22h30"> 21h50-22h25 </option>
                     <option value="22h30-23h"> 22h40-23h10 </option>
+                    <option> INTERDIT </option>
+                    <option> 17h30 </option>
+                    <option> Petite porte </option>
                 </select>
 
                 <label for="paiement">Paiement :</label><br />
