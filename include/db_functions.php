@@ -226,6 +226,14 @@ function determination_recherche($recherche, $rang)
             $count_recherche = $count_recherche->fetch()['count(*)'];
             break;
         }
+        case(preg_match("#^tickets$#", $recherche) ? true:false):
+        {
+            $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE tickets_boisson > 0 ORDER BY tickets_boisson DESC LIMIT :rang,25');
+            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+            $count_recherche =$bd->prepare('SELECT count(*) FROM guests WHERE tickets_boisson > 0');
+            $count_recherche = $count_recherche->fetch()['count(*)'];
+            break;
+        }
         case(preg_match("#^21h|21h50|22h40$#", $recherche) ?true:false):
         {
             $champ='plage_horaire_entrees';
