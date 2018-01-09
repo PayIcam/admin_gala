@@ -63,6 +63,7 @@
                     <option> INTERDIT </option>
                     <option> 17h30 </option>
                     <option> Petite porte </option>
+                    <option> Libre </option>
                 </select>
 
                 <label for="paiement">Paiement :</label><br />
