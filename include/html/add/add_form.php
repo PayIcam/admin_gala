@@ -51,6 +51,8 @@
                     <option> Permanent </option>
                     <option> 117 </option>
                     <option> Parent </option>
+                    <option> Artiste </option>
+                    <option> Autre </option>
                 </select>
 
                 <label for="creneau">Créneau :</label><br />
