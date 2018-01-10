@@ -1,4 +1,0 @@
-AuthName "Seuls FLorent et Grégoire sont autorisés ici."
-AuthType Basic
-AuthUserFile "/var/www/payicam/prod/admin_gala/secured.htpasswd"
-Require valid-user
