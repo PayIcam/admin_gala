@@ -234,7 +234,7 @@ function determination_recherche($recherche, $rang)
             $count_recherche = $count_recherche->fetch()['count(*)'];
             break;
         }
-        case(preg_match("#^21h|21h50|22h40|petite porte|INTERDIT$#", $recherche) ?true:false):
+        case(preg_match("#^21h|21h50|22h40|Petite porte|INTERDIT|Libre|17h30$#", $recherche) ?true:false):
         {
             $champ='plage_horaire_entrees';
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE plage_horaire_entrees = :plage_horaire_entrees LIMIT :rang,25');
@@ -254,6 +254,11 @@ function determination_recherche($recherche, $rang)
                 case '22h40':
                 {
                     $horaire = '22h30-23h';
+                    break;
+                }
+                default:
+                {
+                    $horaire = $recherche;
                     break;
                 }
             }
