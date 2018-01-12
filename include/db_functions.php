@@ -206,7 +206,7 @@ function determination_recherche($recherche, $rang)
             $count_recherche = $count_recherche->fetch()['count(*)'];
             break;
         }
-        case(preg_match("#^11[789]|12[012]|201[89]|202[012]|Ingénieur|FC|Parent|Permanent$#i", $recherche) ? true : false):
+        case(preg_match("#^11[789]|12[012]|201[89]|202[012]|Ingénieur|FC|Parent|Permanent|Autre|Artiste$#i", $recherche) ? true : false):
         {
             $champ='promo';
             $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE promo = :promo LIMIT :rang,25');

@@ -26,9 +26,9 @@
         </div>
         <button class="btn btn-primary" type="submit">Rechercher</button>
 
-        <!-- <div class="col-md-3">
+        <div class="col-md-3">
             <a href="secured/ajouter_invite.php" class="btn btn-primary">Ajouter un invité</a>
-        </div> -->
+        </div>
     </div>
 </form>
 <br/>

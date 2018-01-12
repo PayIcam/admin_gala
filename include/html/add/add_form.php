@@ -11,6 +11,9 @@
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="nom" required <?php if(isset($precedent_ajout['nom'])){echo 'value='.$precedent_ajout['nom'];}?> />
             </div>
             <br/>
+            <?php if(!isset($_POST['add_id']))
+            {
+            ?>
             <div class="input-group col-md-6">
                 <span class="input-group-addon" id="sizing-addon2">Mail</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="email" <?php if(isset($precedent_ajout['email'])){echo 'value='.$precedent_ajout['email'];}?> />
@@ -21,6 +24,7 @@
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="tel" <?php if(isset($precedent_ajout['tel'])){echo 'value='.$precedent_ajout['tel'];}?> />
             </div>
             <br/>
+            <?php } ?>
             <div class="input-group col-md-6">
                 <span class="input-group-addon" id="sizing-addon2">N° de bracelet</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="bracelet" />
@@ -36,6 +40,9 @@
             <div class='col-md-3'>
                 <label for="promo">Promo :</label><br />
                 <select required class="form-control" name="promo" id="promo">
+                    <?php if(!isset($_POST['add_id']))
+                    {
+                    ?>
                     <option> 120 </option>
                     <option> 119 </option>
                     <option> 118 </option>
@@ -52,7 +59,9 @@
                     <option> 117 </option>
                     <option> Parent </option>
                     <option> Artiste </option>
+                    <?php } ?>
                     <option> Autre </option>
+                    <?php if(isset($_POST['add_id'])) { ?> <option selected></option> <?php } ?>
                 </select>
 
                 <label for="creneau">Créneau :</label><br />
@@ -82,13 +91,24 @@
                     <option> 20 </option>
                     <option> 30 </option>
                 </select>
+
+                <label for="is_icam">Icam :</label><br />
+                <select required class="form-control" name="is_icam" id="is_icam">
+                    <option value=1> Oui </option>
+                    <option value=0> Non </option>
+                </select>
+
             </div>
 
             Options Supplémentaires : <br />
             <input type="radio" name="dîner" value=1 id="dîner" /> <label for="dîner"> Dîner <br /> </label>
             <input type="radio" name="conférence" value=1 id="conférence" /> <label for="conférence"> Conférence <br /> </label>
 
-            <input type=hidden name="is_icam" value=1 />
+            <?php if(isset($_POST['add_id']))
+            {
+                echo '<input type="hidden" name="invite" value=1 /> <input type="hidden" name="add_id" value="'. $_POST['add_id'].'" />';
+            }
+            ?>
         </div>
     </div>
 
