@@ -260,13 +260,72 @@ function determination_recherche($recherche, $rang)
             $count_recherche = $count_recherche->fetch()['count(*)'];
             break;
         }
-        case(preg_match("#^11[789]|12[012]|201[89]|202[012]|Ingénieur|FC|Parent|Permanent|Autre|Artiste$#i", $recherche) ? true : false):
+        case(preg_match("#^(11[789]|12[012]|201[89]|202[012]|Ingénieur|FC|Parent|Permanent|Autre|Artiste){1}( (no )?(bracelet|invite|bracelet invite))?$#i", $recherche) ? true : false):
         {
             $champ='promo';
-            $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE promo = :promo LIMIT :rang,25');
-            $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
-            $recherche_bdd -> bindParam('promo', $recherche, PDO::PARAM_STR);
-            $count_recherche = count_promo($recherche);
+            $rechercheee = explode(" ", $recherche,5);
+            $promo = $rechercheee[0];
+            if(!isset($rechercheee[1]))
+            {
+                $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE promo = :promo LIMIT :rang,25');
+                $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+                $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
+                $count_recherche = count_promo($promo);
+            }
+            elseif(!isset($rechercheee[2]))
+            {
+                $indicateur = $rechercheee[1];
+                if($indicateur=='bracelet')
+                {
+                    $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE promo = :promo AND bracelet_id >0 LIMIT :rang,25');
+                    $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+                    $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
+                    $count_recherche = count_bracelet_promo($promo, true);
+                }
+                else
+                {
+                    $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE id IN(SELECT guest_id FROM icam_has_guest INNER JOIN guests ON guests.id = icam_has_guest.icam_id WHERE promo=:promo) LIMIT :rang,25');
+                    $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+                    $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
+                    $count_recherche = count_invite_promo($promo, true);
+                }
+            }
+            elseif(!isset($rechercheee[3]))
+            {
+                $indicateur1=$rechercheee[1];
+                if($indicateur1=='no')
+                {
+                    $indicateur2=$rechercheee[2];
+                    if($indicateur2=='bracelet')
+                    {
+                        $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE promo = :promo AND bracelet_id IS NULL LIMIT :rang,25');
+                        $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+                        $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
+                        $count_recherche = count_bracelet_promo($promo, false);
+                    }
+                    else
+                    {
+                        $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE promo=:promo AND id NOT IN(SELECT icam_id FROM icam_has_guest) LIMIT :rang,25');
+                        $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+                        $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
+                        $count_recherche = count_invite_promo($promo, false);
+                    }
+                }
+                else
+                {
+                    $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE id IN(SELECT guest_id FROM icam_has_guest INNER JOIN guests ON guests.id = icam_has_guest.icam_id WHERE promo=:promo) AND bracelet_id >0 LIMIT :rang,25');
+                    $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+                    $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
+                    $count_recherche = count_invite_bracelet_promo($promo, true);
+                }
+            }
+            else
+            {
+                $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE id IN(SELECT guest_id FROM icam_has_guest INNER JOIN guests ON guests.id = icam_has_guest.icam_id WHERE promo=:promo) AND bracelet_id IS NULL LIMIT :rang,25');
+                $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
+                $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
+                $count_recherche = count_invite_bracelet_promo($promo, false);
+            }
             break;
         }
         case(preg_match("#^[0-9]{1,4}$#", $recherche) ? true:false):
@@ -437,7 +496,6 @@ function determination_recherche($recherche, $rang)
         }
         default:
         {
-            // echo 'default';
             $recherche_bdd =$bd-> prepare('SELECT * FROM guests WHERE nom REGEXP :recherche OR prenom REGEXP :recherche LIMIT :rang,25');
             $recherche_bdd -> bindParam('rang', $rang, PDO::PARAM_INT);
             $recherche_bdd -> bindParam('recherche', $recherche, PDO::PARAM_STR);
@@ -475,7 +533,6 @@ function set_quotas()
     }
     function set_current_status($quotas)
     {
-        // var_dump($quotas);
         foreach($quotas as $quota)
         {
             switch($quota['name'])
