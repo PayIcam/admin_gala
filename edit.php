@@ -7,6 +7,7 @@ if (isset($_SERVER['HTTP_REFERER']))
     $current_url = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
     if ($_SERVER['HTTP_REFERER']==$current_url and !isset($_POST['fromicam']) and !isset($_SESSION['retour_edit']))
     {
+        if(!isset($_POST['gotoicam']))
         $_POST = $_SESSION['page_precedente'];
     }
 }

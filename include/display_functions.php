@@ -54,7 +54,14 @@ function set_start_lign($page)
 }
 function nombre_de_pages($entrees, $step)
 {
-    $nb_de_pages = intval($entrees/$step)+1;
+    if(gettype($entrees/$step)!='integer')
+    {
+        $nb_de_pages = intval($entrees/$step)+1;
+    }
+    else
+    {
+        $nb_de_pages = $entrees/$step;
+    }
     return $nb_de_pages;
 }
 function four_chars_bracelet_id($bracelet_id)
