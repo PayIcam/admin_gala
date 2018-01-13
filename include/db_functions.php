@@ -98,6 +98,60 @@ function count_promo($promo)
     $nb = $nb->fetch()['nb'];
     return $nb;
 }
+function count_bracelet_promo($promo, $condition)
+{
+    global $bd;
+    if ($condition==true)
+    {
+        $nb = $bd -> prepare('SELECT COUNT(*) nb FROM guests WHERE promo=:promo AND bracelet_id>0');
+        $nb -> execute(array('promo' => $promo));
+        $nb = $nb->fetch()['nb'];
+        return $nb;
+    }
+    else
+    {
+        $nb = $bd -> prepare('SELECT COUNT(*) nb FROM guests WHERE promo=:promo AND bracelet_id IS NULL');
+        $nb -> execute(array('promo' => $promo));
+        $nb = $nb->fetch()['nb'];
+        return $nb;
+    }
+}
+function count_invite_promo($promo, $condition)
+{
+    global $bd;
+    if ($condition==true)
+    {
+        $nb = $bd -> prepare('SELECT COUNT(*) nb FROM icam_has_guest INNER JOIN guests ON guests.id = icam_has_guest.icam_id WHERE promo=:promo');
+        $nb -> execute(array('promo' => $promo));
+        $nb = $nb->fetch()['nb'];
+        return $nb;
+    }
+    else
+    {
+        $nb = $bd -> prepare('SELECT COUNT(*) nb FROM guests WHERE promo=:promo AND id NOT IN(SELECT icam_id FROM icam_has_guest)');
+        $nb -> execute(array('promo' => $promo));
+        $nb = $nb->fetch()['nb'];
+        return $nb;
+    }
+}
+function count_invite_bracelet_promo($promo, $condition)
+{
+    global $bd;
+    if($condition==true)
+    {
+        $nb = $bd -> prepare('SELECT COUNT(*) nb FROM (SELECT icam_id icam, guest_id guest FROM icam_has_guest INNER JOIN guests ON guests.id = icam_has_guest.icam_id WHERE promo=:promo ) AS T INNER JOIN guests ON guests.id = T.guest WHERE bracelet_id>0');
+        $nb -> execute(array('promo' => $promo));
+        $nb = $nb->fetch()['nb'];
+        return $nb;
+    }
+    else
+    {
+        $nb = $bd -> prepare('SELECT COUNT(*) nb FROM (SELECT icam_id icam, guest_id guest FROM icam_has_guest INNER JOIN guests ON guests.id = icam_has_guest.icam_id WHERE promo=:promo ) AS T INNER JOIN guests ON guests.id = T.guest WHERE bracelet_id IS NULL');
+        $nb -> execute(array('promo' => $promo));
+        $nb = $nb->fetch()['nb'];
+        return $nb;
+    }
+}
 function count_creneau($creneau)
 {
     global $bd;
@@ -483,6 +537,86 @@ function set_quotas()
         }
         return $status;
     }
+    function count_total_promo($promo)
+    {
+        global $bd;
+        $nb = $bd -> prepare('SELECT COUNT(*) nb FROM etudiants_icam_lille where promo=:promo');
+        $nb -> execute(array('promo' => $promo));
+        $nb = $nb->fetch()['nb'];
+        return $nb;
+    }
+    function get_promos()
+    {
+        global $bd;
+        $nb = $bd -> query('SELECT DISTINCT promo FROM guests WHERE promo IS NOT NULL ORDER BY promo');
+        $nb = $nb->fetchall();
+        return $nb;
+    }
+    function get_promos_payicam()
+    {
+        global $bd;
+        $nb = $bd -> prepare('SELECT DISTINCT promo FROM etudiants_icam_lille');
+        $nb = $nb->fetchall();
+        return $nb;
+    }
+    function get_status_per_promo()
+    {
+        $all_promos = get_promos();
+        foreach($all_promos as $promo)
+        {
+            $promo = $promo['promo'];
+
+            $nb_inscris = count_promo($promo);
+            $nb_total_promo = count_total_promo($promo);
+            $nb_invite = count_invite_promo($promo, true);
+            $nb_bracelets_promo = count_bracelet_promo($promo, true);
+            $nb_bracelets_invite = count_invite_bracelet_promo($promo, true);
+
+            $nb_participants = $nb_invite + $nb_inscris;
+            $nb_bracelets_participants = $nb_bracelets_promo + $nb_bracelets_invite;
+
+
+
+            if($nb_total_promo ==0)
+            {
+                $pourcentage_inscris = 'undefined';
+            }
+            else
+            {
+                $pourcentage_inscris = $nb_inscris/$nb_total_promo;
+                $pourcentage_inscris = round($pourcentage_inscris*100, 2);
+                $pourcentage_inscris = $pourcentage_inscris;
+            }
+            if($nb_participants ==0)
+            {
+                $pourcentage_bracelets = 'undefined';
+            }
+            elseif($promo ==120)
+            {
+                $pourcentage_bracelets = $nb_bracelets_invite/$nb_invite;
+                $pourcentage_bracelets = round($pourcentage_bracelets*100, 2);
+                $pourcentage_bracelets = $pourcentage_bracelets;
+            }
+            else
+            {
+                $pourcentage_bracelets = $nb_bracelets_participants/$nb_participants;
+                $pourcentage_bracelets = round($pourcentage_bracelets*100, 2);
+                $pourcentage_bracelets = $pourcentage_bracelets;
+            }
+
+            $tableau_promos[]=array(
+                'Promo' => $promo,
+                'inscris' => $nb_inscris,
+                'invite' => $nb_invite,
+                'total_promo' => $nb_total_promo,
+                'pourcentage_inscris' => $pourcentage_inscris,
+                'bracelets_promo' => $nb_bracelets_promo,
+                'bracelets_invite' => $nb_bracelets_invite,
+                'pourcentage_bracelets' => $pourcentage_bracelets
+                );
+        }
+        return $tableau_promos;
+    }
     global $bd;
     global $nb_total;
 
@@ -501,6 +635,9 @@ function set_quotas()
     $status[]=array('name' => 'telephone/icam', 'name1' => 'nombre de numéros de téléphone renseignés', 'value1' => $nb_telephone, 'name2' => 'nombre d\'Icams', 'value2' => $nb_icam);
     $status[]=array('name' => 'icam/invité', 'name1' => 'nombre d\'Icams', 'value1' => $nb_icam, 'name2' => 'nombre d\'invités', 'value2' => $nb_invite);
 
+    $promos = get_status_per_promo();
+
+    $status = array_merge($status, $promos);
     // $status[]=array('name' => 'telephone/icam', 'nombre de numéros de téléphone renseignés' => $nb_telephone, 'nombre d\'Icams' => $nb_icam);
     // $status[]=array('name' => 'icam/invité', 'nombre d\'Icams' => $nb_icam, 'nombre d\'invités' => $nb_invite);
 

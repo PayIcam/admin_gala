@@ -163,3 +163,47 @@ function is_correct_bracelet($bracelet_id,$creneau)
         }
     }
 }
+function color_percentage($percentage)
+{
+    switch ($percentage)
+    {
+        case 'undefined':
+        {
+            break;
+        }
+        case $percentage<25:
+        {
+            $percentage = '<span style="color:#cc0000; font-weight:bold">'.$percentage.'%</span>';
+            break;
+        }
+        case $percentage<50:
+        {
+            $percentage = '<span style="color:#ff6600">'.$percentage.'%</span>';
+            break;
+        }
+        case $percentage<75:
+        {
+            $percentage = '<span style="color:#ffcc00">'.$percentage.'%</span>';
+            break;
+        }
+        case $percentage<90:
+        {
+            $percentage = '<span style="color:blue">'.$percentage.'%</span>';
+            break;
+        }
+        case $percentage<100:
+        {
+            $percentage = '<span style="color:#50D050">'.$percentage.'%</span>';
+            break;
+        }
+        case 100:
+        {
+            $percentage = '<span style="color:green; font-weight:bold">'.$percentage.'%</span>';
+            break;
+        }
+        default:
+        {
+        }
+    }
+    return $percentage;
+}
