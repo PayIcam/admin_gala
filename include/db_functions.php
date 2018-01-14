@@ -758,17 +758,14 @@ function set_creneaux_date()
             }
             if(!isset($creneau1))
             {
-                echo ' no1';
                 $creneau1=$creneau_vide;
             }
             if(!isset($creneau2))
             {
-                echo ' no2';
                 $creneau2=$creneau_vide;
             }
             if(!isset($creneau3))
             {
-                echo ' no3';
                 $creneau3=$creneau_vide;
             }
             $stats_creneau=array();
@@ -786,7 +783,6 @@ function set_creneaux_date()
         $date_numeric = strtotime('-'.$i.' day', strtotime($date_etudiee));
         $date_etudiee = date('Y-m-d', $date_numeric);
         $belle_date = date('d/m/Y', $date_numeric);
-        var_dump($date_etudiee);
         $array_date = array('date' => $belle_date);
 
         $req = $bd->prepare('SELECT plage_horaire_entrees,COUNT(*) FROM guests WHERE date(inscription) =:date_etudiee AND plage_horaire_entrees IN ("21h-21h45", "21h45-22h30", "22h30-23h") GROUP BY plage_horaire_entrees ORDER BY plage_horaire_entrees');
