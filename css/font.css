@@ -63,7 +63,11 @@
 {
     margin: 0 50px;
 }
-.all_parametres
+.container_tableau4
+{
+    margin: 0 400px;
+    text-align:center;
+}.all_parametres
 {
     font-size: 1.5em;
     margin-top: 50px;

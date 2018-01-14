@@ -1,4 +1,4 @@
-    <div class="container_comparaisons">
+    <div style="margin:50px 0px;" class="container_comparaisons">
     <?php
     for ($i=6; $i<=9; $i++)
     {

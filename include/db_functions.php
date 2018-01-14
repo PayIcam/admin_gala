@@ -716,3 +716,32 @@ function set_id_inviteur($id)
     $invite_id = $inviteur->fetch()['icam_id'];
     return $invite_id;
 }
+function set_creneaux_date()
+{
+    global $bd;
+    date_default_timezone_set('Europe/Paris');
+    for($i=0; $i<=6; $i++)
+    {
+        $date_etudiee = date('Y-m-d');
+        $date_numeric = strtotime('-'.$i.' day', strtotime($date_etudiee));
+        $date_etudiee = date('Y-m-d', $date_numeric);
+        $belle_date = date('d/m/Y', $date_numeric);
+        var_dump($date_etudiee);
+
+        $array_date = array('date' => $belle_date);
+        $req = $bd->prepare('SELECT COUNT(*) FROM guests WHERE date(inscription) =:date_etudiee AND plage_horaire_entrees IN ("21h-21h45", "21h45-22h30", "22h30-23h") GROUP BY plage_horaire_entrees ORDER BY plage_horaire_entrees');
+        $req ->execute(array('date_etudiee' => $date_etudiee));
+        $stats_creneau = $req->fetchall();
+        // var_dump($stats_jour);
+        $req=$bd->prepare('SELECT COUNT(*) FROM guests WHERE date(inscription) =:date_etudiee');
+        $req ->execute(array('date_etudiee' => $date_etudiee));
+        $stats_total=$req->fetchall();
+        $stats_jour = array_merge($array_date,$stats_creneau);
+        $stats_jour = array_merge($stats_jour,$stats_total);
+        // var_dump($stats_jour);
+        $stats[]=$stats_jour;
+
+    }
+    // var_dump($stats);
+    return $stats;
+}

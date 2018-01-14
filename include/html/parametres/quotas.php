@@ -1,6 +1,6 @@
 <div class="all_parametres">
     <div class="tableau_quota">
-        <legend><strong>Quotas type de places</strong></legend>
+        <legend style="font-size:1.8em;"><strong>Quotas type de places</strong></legend>
         <table class="table table-bordered" style="background-color: #ffffff;">
             <thead>
                 <tr>

@@ -1,6 +1,6 @@
     <div class="stats_promos">
         <div class="container_tableau3">
-            <legend> Statistiques par Promo </legend>
+            <legend style="text-align:center;font-size:2em; margin: 30px 0px"> Statistiques par Promo </legend>
             <table class="table table-bordered tableau3" style="background-color: #ffffff;">
                 <thead>
                     <tr class="ligne_tableau3">
@@ -38,9 +38,3 @@
             </table>
         </div>
     </div>
-
-
-
-
-
-</div>
