@@ -17,7 +17,6 @@
                 for ($i=0; $i<=6; $i++)
                 {
                     $row = $daily_stats[$i];
-                    // var_dump($row);
                 ?>
                     <tr class="ligne_tableau4">
                         <td class="case_tableau4"><?php echo htmlspecialchars($row['date']);  ?> </td>

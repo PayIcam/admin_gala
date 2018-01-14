@@ -718,6 +718,66 @@ function set_id_inviteur($id)
 }
 function set_creneaux_date()
 {
+    function check_and_change_stats_creneau($stats_creneau)
+    {
+        $creneau_vide = array('COUNT(*)' => 0);
+        if(count($stats_creneau)==3)
+        {
+            return $stats_creneau;
+        }
+        elseif(count($stats_creneau)==0)
+        {
+            $stats_creneau[] =$creneau_vide;
+            $stats_creneau[] =$creneau_vide;
+            $stats_creneau[] =$creneau_vide;
+            return $stats_creneau;
+        }
+        else
+        {
+            foreach($stats_creneau as $creneau)
+            {
+                echo $creneau['plage_horaire_entrees'];
+                switch($creneau['plage_horaire_entrees'])
+                {
+                    case '21h-21h45':
+                    {
+                        $creneau1=$creneau;
+                        break;
+                    }
+                    case '21h45-22h30':
+                    {
+                        $creneau2=$creneau;
+                        break;
+                    }
+                    case '22h30-23h':
+                    {
+                        $creneau3=$creneau;
+                        break;
+                    }
+                }
+            }
+            if(!isset($creneau1))
+            {
+                echo ' no1';
+                $creneau1=$creneau_vide;
+            }
+            if(!isset($creneau2))
+            {
+                echo ' no2';
+                $creneau2=$creneau_vide;
+            }
+            if(!isset($creneau3))
+            {
+                echo ' no3';
+                $creneau3=$creneau_vide;
+            }
+            $stats_creneau=array();
+            $stats_creneau[]=$creneau1;
+            $stats_creneau[]=$creneau2;
+            $stats_creneau[]=$creneau3;
+            return $stats_creneau;
+        }
+    }
     global $bd;
     date_default_timezone_set('Europe/Paris');
     for($i=0; $i<=6; $i++)
@@ -727,21 +787,20 @@ function set_creneaux_date()
         $date_etudiee = date('Y-m-d', $date_numeric);
         $belle_date = date('d/m/Y', $date_numeric);
         var_dump($date_etudiee);
-
         $array_date = array('date' => $belle_date);
-        $req = $bd->prepare('SELECT COUNT(*) FROM guests WHERE date(inscription) =:date_etudiee AND plage_horaire_entrees IN ("21h-21h45", "21h45-22h30", "22h30-23h") GROUP BY plage_horaire_entrees ORDER BY plage_horaire_entrees');
+
+        $req = $bd->prepare('SELECT plage_horaire_entrees,COUNT(*) FROM guests WHERE date(inscription) =:date_etudiee AND plage_horaire_entrees IN ("21h-21h45", "21h45-22h30", "22h30-23h") GROUP BY plage_horaire_entrees ORDER BY plage_horaire_entrees');
         $req ->execute(array('date_etudiee' => $date_etudiee));
         $stats_creneau = $req->fetchall();
-        // var_dump($stats_jour);
+        $stats_creneau = check_and_change_stats_creneau($stats_creneau);
+
         $req=$bd->prepare('SELECT COUNT(*) FROM guests WHERE date(inscription) =:date_etudiee');
         $req ->execute(array('date_etudiee' => $date_etudiee));
         $stats_total=$req->fetchall();
         $stats_jour = array_merge($array_date,$stats_creneau);
         $stats_jour = array_merge($stats_jour,$stats_total);
-        // var_dump($stats_jour);
-        $stats[]=$stats_jour;
 
+        $stats[]=$stats_jour;
     }
-    // var_dump($stats);
     return $stats;
 }
