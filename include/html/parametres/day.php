@@ -1,6 +1,6 @@
     <div class="stats_promos">
         <div class="container_tableau4">
-            <legend style="text-align:center;font-size:2em; margin: 30px 0px"> Créneaux des 7 dernières jours </legend>
+            <legend style="text-align:center;font-size:2em; margin: 30px 0px"> Créneaux des 7 derniers jours </legend>
             <table class="table table-bordered tableau4" style="background-color: #ffffff;">
                 <thead>
                     <tr class="ligne_tableau4">
