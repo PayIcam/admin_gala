@@ -736,7 +736,6 @@ function set_creneaux_date()
         {
             foreach($stats_creneau as $creneau)
             {
-                echo $creneau['plage_horaire_entrees'];
                 switch($creneau['plage_horaire_entrees'])
                 {
                     case '21h-21h45':
