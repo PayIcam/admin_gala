@@ -260,7 +260,7 @@ function determination_recherche($recherche, $rang)
             $count_recherche = $count_recherche->fetch()['count(*)'];
             break;
         }
-        case(preg_match("#^(11[789]|12[012]|201[89]|202[012]|Ingénieur|FC|Parent|Permanent|Autre|Artiste){1}( (no )?(bracelet|invite|bracelet invite))?$#i", $recherche) ? true : false):
+        case(preg_match("#^(11[789]|12[012]|201[89]|202[012]|Ingénieur|MI|FC|Parent|Permanent|Autre|Artiste){1}( (no )?(bracelet|invite|bracelet invite))?$#i", $recherche) ? true : false):
         {
             $champ='promo';
             $rechercheee = explode(" ", $recherche,5);
