@@ -45,16 +45,22 @@
             <label for="creneau">Créneaux d'entrée :</label><br />
             <select class="form-control" name="creneau" id="creneau">
                 <?php
+                $selected=0;
                 foreach($current_creneaux_quotas as $current_creneau_quota)
                 {
                     if($edit_data['plage_horaire_entrees']==$current_creneau_quota['creneau'])
                     {
+                        $selected=1;
                         echo '<option selected value="'.$current_creneau_quota['creneau'].'">'.$current_creneau_quota['vrai_creneau'].'</option>';
                     }
                     elseif($current_creneau_quota['actuellement'] < $current_creneau_quota['quota'])
                     {
                         echo '<option value="'.$current_creneau_quota['creneau'].'">'.$current_creneau_quota['vrai_creneau'].'</option>';
                     }
+                }
+                if($selected==0)
+                {
+                    echo '<option selected>'.$edit_data['plage_horaire_entrees'].'</option>';
                 }
                 ?>
             </select>
