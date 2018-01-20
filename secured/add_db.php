@@ -72,6 +72,10 @@ if(!isset($_POST['invite']))
 }
 else
 {
+    if($_POST['promo']=="")
+    {
+        $_POST['promo']=null;
+    }
     if($creneau=='')
     {
         $creneau=null;
