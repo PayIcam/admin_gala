@@ -39,7 +39,7 @@
         <div class="other_input">
             <div class='col-md-3'>
                 <label for="promo">Promo :</label><br />
-                <select required class="form-control" name="promo" id="promo">
+                <select class="form-control" name="promo" id="promo">
                     <?php if(!isset($_POST['add_id']))
                     {
                     ?>
@@ -59,9 +59,10 @@
                     <option> 117 </option>
                     <option> Parent </option>
                     <option> Artiste </option>
+                    <option> MI </option>
                     <?php } ?>
+                    <?php if(isset($_POST['add_id'])) { ?> <option value="" selected></option> <?php } ?>
                     <option> Autre </option>
-                    <?php if(isset($_POST['add_id'])) { ?> <option selected></option> <?php } ?>
                 </select>
 
                 <label for="creneau">Créneau :</label><br />
@@ -73,6 +74,8 @@
                     <option> 17h30 </option>
                     <option> Petite porte </option>
                     <option> Libre </option>
+                    <option> Invité Artiste </option>
+
                 </select>
 
                 <label for="paiement">Paiement :</label><br />
@@ -90,6 +93,8 @@
                     <option> 10 </option>
                     <option> 20 </option>
                     <option> 30 </option>
+                    <option> 40 </option>
+                    <option> 50 </option>
                 </select>
 
                 <label for="is_icam">Icam :</label><br />
