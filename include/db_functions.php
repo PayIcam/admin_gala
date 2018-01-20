@@ -49,25 +49,26 @@ function nombre_invites($guest)
         $nb_invite -> execute(array('id' => $guest['id']));
         $nb_invite = $nb_invite->fetch()['nb'];
 
-        switch ($guest['promo'])
-        {
-            case 120:
-            {
-                $total = 3;
-                break;
-            }
-            case 119:
-            case 118:
-            {
-                $total = 2;
-                break;
-            }
-            default:
-            {
-                $total =1;
-                break;
-            }
-        }
+        $total =8;
+        // switch ($guest['promo'])
+        // {
+        //     case 120:
+        //     {
+        //         $total = 3;
+        //         break;
+        //     }
+        //     case 119:
+        //     case 118:
+        //     {
+        //         $total = 2;
+        //         break;
+        //     }
+        //     default:
+        //     {
+        //         $total =1;
+        //         break;
+        //     }
+        // }
         $message = $nb_invite . "/" . $total;
         return $message;
     }
