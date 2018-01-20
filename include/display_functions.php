@@ -22,7 +22,7 @@ function diner_conference($guest)
         echo htmlspecialchars('Pas d\'options');
     }
 }
-function ajustement_creneau($creneau, $echo=1)
+function ajustement_creneau($creneau, $echo=true)
 {
     switch ($creneau)
     {
@@ -36,7 +36,7 @@ function ajustement_creneau($creneau, $echo=1)
             $creneau = '<span style="color: green">22h40-23h10 </span> ';
             break;
     }
-    if($echo==1)
+    if($echo==true)
     {
         echo ($creneau);
     }
@@ -117,7 +117,7 @@ function four_chars_bracelet_id($bracelet_id)
     }
     return $id;
 }
-function is_correct_bracelet($bracelet_id,$creneau)
+function is_correct_bracelet($bracelet_id, $creneau, $id_exempted)
 {
     switch ($bracelet_id)
     {
@@ -134,6 +134,18 @@ function is_correct_bracelet($bracelet_id,$creneau)
             }
             else
             {
+                $infos_bracelets_pris = get_liste_bracelets('21h-21h45', $id_exempted);
+                foreach($infos_bracelets_pris as $info_bracelet_pris)
+                {
+                    if (in_array($bracelet_id, $info_bracelet_pris))
+                    {
+                        echo 'in array';
+                        $prenom = $info_bracelet_pris['prenom'];
+                        $nom= $info_bracelet_pris['nom'];
+                        $_SESSION['erreur_bracelet'] ='Le bracelet '.four_chars_bracelet_id($bracelet_id).' est déjà pris par '.$prenom.' '.$nom.'! Recommencez svp';
+                        return false;
+                    }
+                }
                 return true;
             }
         }
@@ -146,6 +158,18 @@ function is_correct_bracelet($bracelet_id,$creneau)
             }
             else
             {
+                $bracelets_pris = get_liste_bracelets('21h45-22h30', $id_exempted);
+                foreach($infos_bracelets_pris as $info_bracelet_pris)
+                {
+                    if (in_array($bracelet_id, $info_bracelet_pris))
+                    {
+                        echo 'in array';
+                        $prenom = $info_bracelet_pris['prenom'];
+                        $nom= $info_bracelet_pris['nom'];
+                        $_SESSION['erreur_bracelet'] ='Le bracelet '.four_chars_bracelet_id($bracelet_id).' est déjà pris par '.$prenom.' '.$nom.'! Recommencez svp';
+                        return false;
+                    }
+                }
                 return true;
             }
         }
@@ -158,6 +182,18 @@ function is_correct_bracelet($bracelet_id,$creneau)
             }
             else
             {
+                $bracelets_pris = get_liste_bracelets('22h30-23h', $id_exempted);
+                foreach($infos_bracelets_pris as $info_bracelet_pris)
+                {
+                    if (in_array($bracelet_id, $info_bracelet_pris))
+                    {
+                        echo 'in array';
+                        $prenom = $info_bracelet_pris['prenom'];
+                        $nom= $info_bracelet_pris['nom'];
+                        $_SESSION['erreur_bracelet'] ='Le bracelet '.four_chars_bracelet_id($bracelet_id).' est déjà pris par '.$prenom.' '.$nom.'! Recommencez svp';
+                        return false;
+                    }
+                }
                 return true;
             }
         }
@@ -216,4 +252,20 @@ function color_percentage($percentage)
         }
     }
     return $percentage;
+}
+function adjust_hour_data($hour_data, $hour_groups)
+{
+    $first_day = $hour_data[0]['day'];
+    foreach($hour_data as $hour)
+    {
+        if($hour['day'] == $first_day)
+        {
+            $day1[] = array();
+
+        }
+        else
+        {
+            $day2[] = array();
+        }
+    }
 }

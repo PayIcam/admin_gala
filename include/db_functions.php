@@ -222,6 +222,14 @@ function count_bracelet($condition)
     $nb = $nb->fetch()['nb'];
     return $nb;
 }
+function get_liste_bracelets($creneau, $id_exempted)
+{
+    global $bd;
+    $bracelets=$bd->prepare('SELECT bracelet_id, prenom, nom  FROM guests WHERE bracelet_id IS NOT NULL AND plage_horaire_entrees=:creneau AND id!=:id_exempted');
+    $bracelets -> execute(array('creneau' => $creneau, 'id_exempted' => $id_exempted));
+    $bracelets = $bracelets->fetchall();
+    return $bracelets;
+}
 function count_telephone($condition)
 {
     global $bd;

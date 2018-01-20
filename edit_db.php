@@ -1,9 +1,10 @@
 <?php
+session_start();
+
 require 'config.php';
 require 'include/db_functions.php';
 require 'include/display_functions.php';
 
-session_start();
 
 $bd = connect_to_db($confSQL);
 
@@ -12,7 +13,7 @@ if (isset($_POST['is_icam']))
     $is_icam=1;
     $bracelet_id = $_POST['bracelet_id'];
     $creneau = $_POST['creneau'];
-    $correct=is_correct_bracelet($bracelet_id, $creneau);
+    $correct=is_correct_bracelet($bracelet_id, $creneau, $_POST['edit_id']);
     if($bracelet_id=="")
     {
         $bracelet_id=null;
@@ -51,6 +52,5 @@ if (isset($_POST['fromicam']))
     $_SESSION['retour_edit']=1;
     unset($_POST['fromicam']);
 }
-
 end:
 header('Location: edit.php');
