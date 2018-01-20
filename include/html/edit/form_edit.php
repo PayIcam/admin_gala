@@ -44,9 +44,19 @@
         <div class='col-md-3'>
             <label for="creneau">Créneaux d'entrée :</label><br />
             <select class="form-control" name="creneau" id="creneau">
-                <option value="21h-21h45" <?php if($edit_data['plage_horaire_entrees']=='21h-21h45') { echo htmlspecialchars(' selected'); }?> > 21h-21h35 </option>
-                <option value="21h45-22h30" <?php if($edit_data['plage_horaire_entrees']=='21h45-22h30') { echo htmlspecialchars(' selected'); }?> > 21h50-22h25 </option>
-                <option value="22h30-23h" <?php if($edit_data['plage_horaire_entrees']=='22h30-23h') { echo htmlspecialchars(' selected'); }?> > 22h40-23h10 </option>
+                <?php
+                foreach($current_creneaux_quotas as $current_creneau_quota)
+                {
+                    if($edit_data['plage_horaire_entrees']==$current_creneau_quota['creneau'])
+                    {
+                        echo '<option selected value="'.$current_creneau_quota['creneau'].'">'.$current_creneau_quota['vrai_creneau'].'</option>';
+                    }
+                    elseif($current_creneau_quota['actuellement'] < $current_creneau_quota['quota'])
+                    {
+                        echo '<option value="'.$current_creneau_quota['creneau'].'">'.$current_creneau_quota['vrai_creneau'].'</option>';
+                    }
+                }
+                ?>
             </select>
         </div>
         <br>

@@ -160,6 +160,21 @@ function count_creneau($creneau)
     $nb = $nb->fetch()['nb'];
     return $nb;
 }
+function count_creneaux_quotas()
+{
+    global $bd;
+    $quotas = $bd->query('SELECT REPLACE(REPLACE(name,"quota_entree_",""),"_","-") creneau, value quota FROM configs WHERE REPLACE(REPLACE(name,"quota_entree_",""),"_","-") in ("21h-21h45","21h45-22h30","22h30-23h") ORDER BY REPLACE(REPLACE(name,"quota_entree_",""),"_","-")');
+    $quotas = $quotas->fetchall();
+    foreach($quotas as $quota)
+    {
+        $nb=count_creneau($quota['creneau']);
+        $quota['actuellement']=$nb;
+        $vrai_creneau=ajustement_creneau($quota['creneau'],false);
+        $quota['vrai_creneau']=$vrai_creneau;
+        $status[]=$quota;
+    }
+    return $status;
+}
 function count_conference()
 {
     global $bd;

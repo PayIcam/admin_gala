@@ -22,7 +22,7 @@ function diner_conference($guest)
         echo htmlspecialchars('Pas d\'options');
     }
 }
-function ajustement_creneau($creneau)
+function ajustement_creneau($creneau, $echo=1)
 {
     switch ($creneau)
     {
@@ -36,7 +36,10 @@ function ajustement_creneau($creneau)
             $creneau = '<span style="color: green">22h40-23h10 </span> ';
             break;
     }
-    echo ($creneau);
+    if($echo==1)
+    {
+        echo ($creneau);
+    }
     return $creneau;
 }
 function set_start_lign($page)
