@@ -158,7 +158,7 @@ function is_correct_bracelet($bracelet_id, $creneau, $id_exempted)
             }
             else
             {
-                $bracelets_pris = get_liste_bracelets('21h45-22h30', $id_exempted);
+                $infos_bracelets_pris = get_liste_bracelets('21h45-22h30', $id_exempted);
                 foreach($infos_bracelets_pris as $info_bracelet_pris)
                 {
                     if (in_array($bracelet_id, $info_bracelet_pris))
@@ -182,7 +182,7 @@ function is_correct_bracelet($bracelet_id, $creneau, $id_exempted)
             }
             else
             {
-                $bracelets_pris = get_liste_bracelets('22h30-23h', $id_exempted);
+                $infos_bracelets_pris = get_liste_bracelets('22h30-23h', $id_exempted);
                 foreach($infos_bracelets_pris as $info_bracelet_pris)
                 {
                     if (in_array($bracelet_id, $info_bracelet_pris))
