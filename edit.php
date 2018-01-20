@@ -31,6 +31,7 @@ if ($nb_invites >0)
 {
     $invites_data = set_invites($edit_id);
 }
+$current_creneaux_quotas = count_creneaux_quotas();
 
 require 'include/html/header.php';
 require 'include/html/edit/edit_title.php';
