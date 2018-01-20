@@ -44,9 +44,12 @@
         <div class='col-md-3'>
             <label for="creneau">Créneaux d'entrée :</label><br />
             <select class="form-control" name="creneau" id="creneau">
+
                 <?php
+                var_dump($current_creneaux_quotas);
                 foreach($current_creneaux_quotas as $current_creneau_quota)
                 {
+                    var_dump('coucou');
                     if($edit_data['plage_horaire_entrees']==$current_creneau_quota['creneau'])
                     {
                         echo '<option selected value="'.$current_creneau_quota['creneau'].'">'.$current_creneau_quota['vrai_creneau'].'</option>';
