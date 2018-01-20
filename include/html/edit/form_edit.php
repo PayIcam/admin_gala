@@ -43,10 +43,9 @@
         <br>
         <div class='col-md-3'>
             <label for="creneau">Créneaux d'entrée :</label><br />
+            <?php var_dump($current_creneaux_quotas); ?>
             <select class="form-control" name="creneau" id="creneau">
-
                 <?php
-                var_dump($current_creneaux_quotas);
                 foreach($current_creneaux_quotas as $current_creneau_quota)
                 {
                     var_dump('coucou');
