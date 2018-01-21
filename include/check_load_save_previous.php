@@ -3,6 +3,15 @@
 if(isset($_SESSION['retour_edit']))
 {
     $_POST = $_SESSION['page_precedente_precedente'];
+    if (isset($_SESSION['page_precedente']))
+    {
+        $_SESSION['page_precedente_precedente'] = $_SESSION['page_precedente'];
+        $_SESSION['page_precedente']=$_POST;
+    }
+    elseif (isset($_POST))
+    {
+        $_SESSION['page_precedente']=$_POST;
+    }
     unset($_SESSION['retour_edit']);
 }
 /*elseif (isset($_POST['retour_page_precedente']))
