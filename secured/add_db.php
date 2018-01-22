@@ -11,7 +11,7 @@ $bd = connect_to_db($confSQL);
 $bracelet = (int)$_POST['bracelet'];
 $creneau = $_POST['creneau'];
 
-$correct= is_correct_bracelet($bracelet, $creneau);
+$correct= is_correct_bracelet($bracelet, $creneau, 0);
 if(!$correct)
 {
     $_SESSION['erreur_ajout']=$_POST;
