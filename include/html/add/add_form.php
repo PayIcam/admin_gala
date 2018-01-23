@@ -59,12 +59,14 @@
                         <option> Artiste </option>
                         <option> MI </option>
                         <option> Invite Pumpkin </option>
+                        <option> Invite 117 </option>
                         <option> Autre </option>
                     <?php }
                     if(isset($_POST['add_id'])) { ?>
                         <option value=""></option>
                         <option selected> Invite Artiste </option>
                         <option> Invite Pumpkin </option>
+                        <option> Invite 117 </option>
                         <option> Autre </option>
                     <?php } ?>
                 </select>
