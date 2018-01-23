@@ -32,7 +32,7 @@
 
             <br/>
             <div class="input-group col-md-6">
-                <span class="input-group-addon" id="sizing-addon2">Price</span>
+                <span class="input-group-addon" id="sizing-addon2" value=0>Price</span>
                 <input type="text" class="form-control" aria-describedby="sizing-addon2" name="price" required <?php if(isset($precedent_ajout['price'])){ echo 'value='.$precedent_ajout['price'];}?> />
             </div>
         </div>
@@ -40,41 +40,42 @@
             <div class='col-md-3'>
                 <label for="promo">Promo :</label><br />
                 <select class="form-control" name="promo" id="promo">
-                    <?php if(!isset($_POST['add_id']))
-                    {
-                    ?>
-                    <option> 120 </option>
-                    <option> 119 </option>
-                    <option> 118 </option>
-                    <option> 121 </option>
-                    <option> 122 </option>
-                    <option> 2018 </option>
-                    <option> 2019 </option>
-                    <option> 2020 </option>
-                    <option> 2021 </option>
-                    <option> 2022 </option>
-                    <option> Ingénieur </option>
-                    <option> FC </option>
-                    <option> Permanent </option>
-                    <option> 117 </option>
-                    <option> Parent </option>
-                    <option> Artiste </option>
-                    <option> MI </option>
+                    <?php if(!isset($_POST['add_id'])) { ?>
+                        <option> 120 </option>
+                        <option> 119 </option>
+                        <option> 118 </option>
+                        <option> 121 </option>
+                        <option> 122 </option>
+                        <option> 2018 </option>
+                        <option> 2019 </option>
+                        <option> 2020 </option>
+                        <option> 2021 </option>
+                        <option> 2022 </option>
+                        <option> Ingénieur </option>
+                        <option> FC </option>
+                        <option> Permanent </option>
+                        <option> 117 </option>
+                        <option> Parent </option>
+                        <option> Artiste </option>
+                        <option> MI </option>
+                    <?php }
+                    if(isset($_POST['add_id'])) { ?>
+                        <option value=""></option>
+                        <option selected> Invité Artiste </option>
+                        <option> Autre </option>
                     <?php } ?>
-                    <?php if(isset($_POST['add_id'])) { ?> <option value="" selected></option> <?php } ?>
-                    <option> Autre </option>
                 </select>
 
                 <label for="creneau">Créneau :</label><br />
                 <select required class="form-control" name="creneau" id="creneau">
                     <option value="21h-21h45"> 21h-21h35 </option>
                     <option value="21h45-22h30"> 21h50-22h25 </option>
-                    <option value="22h30-23h"> 22h40-23h10 </option>
+                    <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> value="22h30-23h" > 22h40-23h10 </option>
                     <option> INTERDIT </option>
                     <option> 17h30 </option>
                     <option> Petite porte </option>
                     <option> Libre </option>
-                    <option> Invité Artiste </option>
+                    <option> BAR 117 </option>
 
                 </select>
 
@@ -82,7 +83,7 @@
                 <select required class="form-control" name="paiement" id="paiement">
                     <option> PayIcam </option>
                     <option> Pumpkin </option>
-                    <option> gratuit </option>
+                    <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> > gratuit </option>
                     <option> cash </option>
                     <option> cb </option>
                 </select>
@@ -100,7 +101,7 @@
                 <label for="is_icam">Icam :</label><br />
                 <select required class="form-control" name="is_icam" id="is_icam">
                     <option value=1> Oui </option>
-                    <option value=0> Non </option>
+                    <option value=0 <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?>> Non </option>
                 </select>
 
             </div>
