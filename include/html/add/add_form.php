@@ -58,10 +58,13 @@
                         <option> Parent </option>
                         <option> Artiste </option>
                         <option> MI </option>
+                        <option> Invite Pumpkin </option>
+                        <option> Autre </option>
                     <?php }
                     if(isset($_POST['add_id'])) { ?>
                         <option value=""></option>
-                        <option selected> Invité Artiste </option>
+                        <option selected> Invite Artiste </option>
+                        <option> Invite Pumpkin </option>
                         <option> Autre </option>
                     <?php } ?>
                 </select>
