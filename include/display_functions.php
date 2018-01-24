@@ -127,7 +127,7 @@ function is_correct_bracelet($bracelet_id, $creneau, $id_exempted)
         }
         case $bracelet_id<=1050:
         {
-            if ($creneau != '21h-21h45' and $creneau != 'Bar 117')
+            if ($creneau != '21h-21h45' and $creneau != 'BAR 117')
             {
                 $_SESSION['erreur_bracelet'] ='Vous avez entré une id ('.four_chars_bracelet_id($bracelet_id).') de bracelet de 1er créneau ! Recommencez svp';
                 return false;
