@@ -99,6 +99,11 @@ else
     $link_invite->execute(array('icam_id' => $_POST['add_id'], 'guest_id' => $id_invite));
 }
 
+if (isset($_POST['add_to_icam']))
+{
+    $_SESSION['retour_add']=1;
+    unset($_POST['add_to_icam']);
+}
 
 end:
 header('Location: ajouter_invite.php');

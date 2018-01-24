@@ -119,6 +119,11 @@
             {
                 echo '<input type="hidden" name="invite" value=1 /> <input type="hidden" name="add_id" value="'. $_POST['add_id'].'" />';
             }
+
+            if(isset($_POST['add_to_icam']))
+            {
+                $_SESSION['retour_add']=1;
+            }
             ?>
         </div>
     </div>
