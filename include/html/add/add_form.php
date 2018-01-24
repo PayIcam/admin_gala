@@ -67,6 +67,7 @@
                         <option selected> Invite Artiste </option>
                         <option> Invite Pumpkin </option>
                         <option> Invite 117 </option>
+                        <option> Invite Permanent </option>
                         <option> Autre </option>
                     <?php } ?>
                 </select>
