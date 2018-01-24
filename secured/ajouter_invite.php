@@ -16,5 +16,3 @@ if(isset($_SESSION['erreur_ajout']))
 $bd = connect_to_db($confSQL);
 
 require'../include/html/display_add.php';
-
-var_dump($_SESSION);
