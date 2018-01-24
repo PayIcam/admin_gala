@@ -675,7 +675,7 @@ function set_quotas()
             elseif($promo ==120)
             {
                 $nb_invite=$nb_invite-126;
-                $pourcentage_bracelets = $nb_bracelets_invite_no_parents/$nb_invite;
+                $pourcentage_bracelets = $nb_bracelets_invite/$nb_invite;
                 $pourcentage_bracelets = round($pourcentage_bracelets*100, 2);
                 $pourcentage_bracelets = $pourcentage_bracelets;
             }
