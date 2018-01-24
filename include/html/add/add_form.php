@@ -53,7 +53,7 @@
                         <option> 2022 </option>
                         <option> Ingénieur </option>
                         <option> FC </option>
-                        <option> Permanent </option>
+                        <option selected> Permanent </option>
                         <option> 117 </option>
                         <option> Parent </option>
                         <option> Artiste </option>
@@ -93,7 +93,7 @@
                     <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> > gratuit </option>
                     <option> cash </option>
                     <option> cb </option>
-                    <option> cheque </option>
+                    <option selected> cheque </option>
                 </select>
 
                 <label for="tickets">Tickets boissons :</label><br />
