@@ -15,7 +15,6 @@
             for($i=0; $i<=5; $i++)
             {
                 $row = $status[$i];
-                // var_dump($row);
             ?>
                 <tr>
                     <td class="case_tableau_1"><label for="row"><?php echo htmlspecialchars($row['name']) ?></label></td>

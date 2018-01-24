@@ -24,7 +24,6 @@ if(isset($_SESSION['retour_edit']))
 }*/
 elseif(isset($_SESSION['retour_add']))
 {
-    var_dump($_SESSION);
     $_POST=$_SESSION['page_precedente'];
 }
 else
