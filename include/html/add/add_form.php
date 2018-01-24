@@ -93,6 +93,7 @@
                     <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> > gratuit </option>
                     <option> cash </option>
                     <option> cb </option>
+                    <option> cheque </option>
                 </select>
 
                 <label for="tickets">Tickets boissons :</label><br />
