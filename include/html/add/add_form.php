@@ -90,7 +90,7 @@
                 <select required class="form-control" name="paiement" id="paiement">
                     <option> PayIcam </option>
                     <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> > Pumpkin </option>
-                    <option> gratuit </option>
+                    <option if(!isset($_POST['add_id'])) { echo 'selected'; } ?> > gratuit </option>
                     <option> cash </option>
                     <option> cb </option>
                     <option> cheque </option>
