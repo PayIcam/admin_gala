@@ -79,7 +79,7 @@
                     <option value="22h30-23h" > 22h40-23h10 </option>
                     <option> INTERDIT </option>
                     <option> 17h30 </option>
-                    <option <?php if(!isset($_POST['add_id'])) { echo selected; } ?> > Petite porte </option>
+                    <option <?php if(!isset($_POST['add_id'])) { echo 'selected'; } ?> > Petite porte </option>
                     <option> Libre </option>
                     <option> BAR 117 </option>
                     <option> 18h30-19h </option>
