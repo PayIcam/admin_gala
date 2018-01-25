@@ -53,10 +53,10 @@
                         <option> 2022 </option>
                         <option> Ingénieur </option>
                         <option> FC </option>
-                        <option selected> Permanent </option>
+                        <option> Permanent </option>
                         <option> 117 </option>
                         <option> Parent </option>
-                        <option> Artiste </option>
+                        <option selected> Artiste </option>
                         <option> MI </option>
                         <option> Invite Pumpkin </option>
                         <option> Invite 117 </option>
@@ -74,9 +74,9 @@
 
                 <label for="creneau">Créneau :</label><br />
                 <select required class="form-control" name="creneau" id="creneau">
-                    <option value="21h-21h45"> 21h-21h35 </option>
+                    <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> value="21h-21h45"> 21h-21h35 </option>
                     <option value="21h45-22h30"> 21h50-22h25 </option>
-                    <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> value="22h30-23h" > 22h40-23h10 </option>
+                    <option value="22h30-23h" > 22h40-23h10 </option>
                     <option> INTERDIT </option>
                     <option> 17h30 </option>
                     <option> Petite porte </option>
@@ -89,8 +89,8 @@
                 <label for="paiement">Paiement :</label><br />
                 <select required class="form-control" name="paiement" id="paiement">
                     <option> PayIcam </option>
-                    <option> Pumpkin </option>
-                    <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> > gratuit </option>
+                    <option <?php if(isset($_POST['add_id'])) { echo 'selected'; } ?> > Pumpkin </option>
+                    <option> gratuit </option>
                     <option> cash </option>
                     <option> cb </option>
                     <option selected> cheque </option>
